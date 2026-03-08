@@ -53,7 +53,7 @@ const Footer = () => (
           <ul className="space-y-3 font-body text-sm">
             <li className="flex items-center gap-2">
               <Mail size={14} className="text-gold flex-shrink-0" />
-              <a href="mailto:info@kpjlegal.com" className="opacity-70 hover:text-gold hover:opacity-100 transition-colors">info@kpjlegal.com</a>
+              <a href="mailto:info@kpjadvocates.com" className="opacity-70 hover:text-gold hover:opacity-100 transition-colors">info@kpjadvocates.com</a>
             </li>
             <li className="flex items-center gap-2">
               <Phone size={14} className="text-gold flex-shrink-0" />

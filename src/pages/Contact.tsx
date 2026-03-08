@@ -131,8 +131,7 @@ const Contact = () => {
                                     <div>
                                         <h3 className="font-heading text-lg font-semibold text-foreground mb-2">Email Address</h3>
                                         <p className="font-body text-muted-foreground leading-relaxed text-sm">
-                                            <a href="mailto:info@kpjlegal.com" className="hover:text-accent transition-colors">info@kpjlegal.com</a><br />
-                                            <a href="mailto:support@kpjlegal.com" className="hover:text-accent transition-colors">support@kpjlegal.com</a>
+                                            <a href="mailto:info@kpjadvocates.com" className="hover:text-accent transition-colors">info@kpjadvocates.com</a>
                                         </p>
                                     </div>
                                 </div>
