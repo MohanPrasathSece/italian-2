@@ -3,7 +3,7 @@ import { Scale, Shield, Users, Award, Briefcase, Heart, Home as HomeIcon, BookOp
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
 import heroImg from "@/assets/hero_bg_@.jpg";
-import lawyerImg from "@/assets/lawyer-portrait.png";
+import lawyerImg from "@/assets/jedidah koilson.jpeg";
 
 import Counter from "@/components/Counter";
 
@@ -154,12 +154,15 @@ const Index = () => {
             >
               <img
                 src={lawyerImg}
-                alt="Ms. Kavitha P. J., Managing Partner at KPJ Advocates"
+                alt="P. J. JEDIDIAH KOILSON B.A., LL.B, Advocate at KPJ Advocates"
                 className="rounded-2xl shadow-xl w-full max-w-md mx-auto object-cover aspect-[4/5] mb-6"
               />
               <div className="text-center">
-                <h4 className="font-heading text-2xl font-bold text-foreground">Ms. Kavitha P. J.</h4>
-                <p className="font-body text-base text-accent italic font-medium">Managing Partner</p>
+                <h4 className="font-heading text-2xl font-bold text-foreground">P. J. JEDIDIAH KOILSON B.A., LL.B</h4>
+                <p className="font-body text-base text-accent italic font-medium mb-1">Advocate</p>
+                <p className="font-body text-[10px] text-muted-foreground uppercase tracking-widest px-4">
+                  Enrolled under THE BAR COUNCIL OF TAMILNADU & PUDUCHERRY
+                </p>
               </div>
             </motion.div>
           </div>

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ChevronRight, Scale, Eye, Shield, Users } from "lucide-react";
-import lawyerImg from "@/assets/lawyer-portrait.png";
+import lawyerImg from "@/assets/jedidah koilson.jpeg";
 import chooseUsImg from "@/assets/courtroom-excellence.png";
 
 
@@ -34,10 +34,11 @@ const About = () => {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="flex flex-col items-center">
-              <img src={lawyerImg} alt="Ms. Kavitha P. J., Founding Partner of KPJ Advocates" className="rounded-2xl shadow-xl w-full max-w-sm mx-auto object-cover aspect-[4/5] mb-4" />
+              <img src={lawyerImg} alt="P. J. JEDIDIAH KOILSON B.A., LL.B, Advocate at KPJ Advocates" className="rounded-2xl shadow-xl w-full max-w-sm mx-auto object-cover aspect-[4/5] mb-4" />
               <div className="text-center">
-                <h4 className="font-heading text-xl font-bold text-foreground">Ms. Kavitha P. J.</h4>
-                <p className="font-body text-base text-accent italic">Founding Partner</p>
+                <h4 className="font-heading text-xl font-bold text-foreground">P. J. JEDIDIAH KOILSON B.A., LL.B</h4>
+                <p className="font-body text-base text-accent italic mb-1">Advocate</p>
+                <p className="font-body text-[10px] text-muted-foreground uppercase tracking-widest">Enrolled under THE BAR COUNCIL OF TAMILNADU & PUDUCHERRY</p>
               </div>
             </div>
             <div>
