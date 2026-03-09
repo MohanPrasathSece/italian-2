@@ -139,7 +139,7 @@ const About = () => {
     <>
       <Helmet>
         {/* ── Name-first title for entity-based brand SERP ── */}
-        <title>P. J. Jedidiah Koilson | Best Advocate in Thoothukudi | About KPJ Advocates</title>
+        <title>About | KPJ Advocates</title>
 
         <meta name="description" content="P. J. Jedidiah Koilson — #1 Advocate in Thoothukudi. Professional lawyer with 25+ years legacy. Expert in Civil, Criminal, Property, and Family Law in Tuticorin." />
 
@@ -160,7 +160,7 @@ const About = () => {
 
         {/* ── Open Graph ── */}
         <meta property="og:type" content="profile" />
-        <meta property="og:title" content="P. J. Jedidiah Koilson | Best Advocate in Thoothukudi | KPJ Advocates" />
+        <meta property="og:title" content="About | KPJ Advocates" />
         <meta property="og:description" content="Professional profile of Advocate P. J. Jedidiah Koilson — #1 rated Advocate in Thoothukudi, Tamil Nadu. Specializing in Civil, Criminal and Property Law." />
         <meta property="og:url" content="https://kpjadvocates.com/about" />
         <meta property="og:image" content="https://kpjadvocates.com/kpj-advocates-thoothukudi-logo.png" />
@@ -172,9 +172,9 @@ const About = () => {
 
         {/* ── Twitter Card ── */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="P. J. Jedidiah Koilson — Advocate | KPJ Advocates" />
+        <meta name="twitter:title" content="About | KPJ Advocates" />
         <meta name="twitter:description" content="Professional Advocate at KPJ Advocates, Thoothukudi. Expert in Civil, Property, Criminal & Family Law." />
-        <meta name="twitter:image" content="https://kpjadvocates.com/kpj_main_logo.png" />
+        <meta name="twitter:image" content="https://kpjadvocates.com/kpj-advocates-thoothukudi-logo.png" />
       </Helmet>
 
       {/* ── Header ── */}

@@ -31,7 +31,7 @@ const Navbar = () => {
       }`}>
       <nav className="container mx-auto flex items-center justify-between px-4 lg:px-8">
         <Link to="/" className="flex items-center" onClick={() => window.scrollTo(0, 0)}>
-          <img src="/kpj_main_logo.png" alt="KPJ Advocates Logo" className={`h-14 w-auto object-contain transition-all ${!scrolled && isHome ? "brightness-0 invert" : ""}`} />
+          <img src="/kpj-advocates-thoothukudi-logo.png" alt="KPJ Advocates Logo" className={`h-14 w-auto object-contain transition-all ${!scrolled && isHome ? "brightness-0 invert" : ""}`} />
         </Link>
 
         {/* Desktop */}

@@ -81,7 +81,7 @@ const areas = [
 const PracticeAreas = () => (
   <>
     <Helmet>
-      <title>Best Legal Services in Thoothukudi | P. J. Jedidiah Koilson | Practice Areas</title>
+      <title>Practice Areas | KPJ Advocates</title>
       <meta name="description" content="Expert legal services in Thoothukudi. #1 Advocate P. J. Jedidiah Koilson specializes in Civil, Criminal, Corporate, Family, and Property Law in Tuticorin." />
       <meta name="keywords" content="Best legal services in Thoothukudi, Best advocate in Thoothukudi, Tuticorin lawyer, Criminal lawyer Thoothukudi, Property law Tuticorin, Family law advocate Thoothukudi, P. J. Jedidiah Koilson" />
       <link rel="canonical" href="https://kpjadvocates.com/practice-areas" />
@@ -90,7 +90,7 @@ const PracticeAreas = () => (
       <script type="application/ld+json">{JSON.stringify(PRACTICE_AREAS_SCHEMA)}</script>
       <script type="application/ld+json">{JSON.stringify(BREADCRUMB_SCHEMA)}</script>
 
-      <meta property="og:title" content="Best Legal Services in Thoothukudi | KPJ Advocates" />
+      <meta property="og:title" content="Practice Areas | KPJ Advocates" />
       <meta property="og:description" content="Top-rated legal expertise in Thoothukudi. Civil, Property, and Criminal law led by P. J. Jedidiah Koilson." />
       <meta property="og:url" content="https://kpjadvocates.com/practice-areas" />
       <meta property="og:type" content="website" />

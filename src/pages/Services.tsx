@@ -144,7 +144,7 @@ const faqs = [
 const Services = () => (
   <>
     <Helmet>
-      <title>Expert Legal Services in Thoothukudi | P. J. Jedidiah Koilson | KPJ Advocates</title>
+      <title>Services | KPJ Advocates</title>
       <meta name="description" content="Comprehensive legal services in Thoothukudi (Tuticorin). #1 Advocate P. J. Jedidiah Koilson provides expert counsel in Property, Banking, Family, and Criminal law." />
       <meta name="keywords" content="Best legal services in Thoothukudi, Best advocate in Thoothukudi, Tuticorin lawyer, Criminal lawyer Thoothukudi, Property law Tuticorin, Family law advocate Thoothukudi, P. J. Jedidiah Koilson" />
       <link rel="canonical" href="https://kpjadvocates.com/services" />
@@ -154,7 +154,7 @@ const Services = () => (
       <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
       <script type="application/ld+json">{JSON.stringify(BREADCRUMB_SCHEMA)}</script>
 
-      <meta property="og:title" content="Expert Legal Services in Thoothukudi | KPJ Advocates" />
+      <meta property="og:title" content="Services | KPJ Advocates" />
       <meta property="og:description" content="Top-rated legal expertise in Thoothukudi. Real Estate, Banking, and Criminal law led by Advocate P. J. Jedidiah Koilson." />
       <meta property="og:url" content="https://kpjadvocates.com/services" />
       <meta property="og:type" content="website" />

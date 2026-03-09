@@ -8,7 +8,7 @@ const Footer = () => (
         {/* Brand */}
         <div>
           <div className="mb-6">
-            <img src="/kpj_main_logo.png" alt="KPJ Advocates Logo" className="h-12 w-auto brightness-0 invert" />
+            <img src="/kpj-advocates-thoothukudi-logo.png" alt="KPJ Advocates Logo" className="h-12 w-auto brightness-0 invert" />
           </div>
           <p className="font-body text-sm leading-relaxed opacity-80">
             A premier law firm committed to upholding justice with integrity, excellence, and unwavering dedication to our clients.

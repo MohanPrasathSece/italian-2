@@ -132,7 +132,7 @@ const Contact = () => {
         <div>
             <Helmet>
                 {/* ── SEO Title: Local Dominance First ── */}
-                <title>Best Advocate in Thoothukudi | Contact P. J. Jedidiah Koilson | KPJ Advocates</title>
+                <title>Contact | KPJ Advocates</title>
 
                 <meta name="description" content="Contact the #1 rated Advocate in Thoothukudi (Tuticorin). P. J. Jedidiah Koilson at KPJ Advocates, Pearl Plaza. Call +91 95003 26495 for expert legal consultation." />
 
@@ -152,7 +152,7 @@ const Contact = () => {
 
                 {/* ── Open Graph ── */}
                 <meta property="og:type" content="website" />
-                <meta property="og:title" content="Best Advocate in Thoothukudi | Contact P. J. Jedidiah Koilson" />
+                <meta property="og:title" content="Contact | KPJ Advocates" />
                 <meta property="og:description" content="Contact the top legal authority in Thoothukudi. Advocate P. J. Jedidiah Koilson — Expert in Civil, Criminal and Property Law." />
                 <meta property="og:url" content="https://kpjadvocates.com/contact" />
                 <meta property="og:image" content="https://kpjadvocates.com/kpj-advocates-thoothukudi-logo.png" />
