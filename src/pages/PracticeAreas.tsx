@@ -24,7 +24,7 @@ const areas = [
     icon: Heart,
     title: "Family Law",
     desc: "Our family law practice provides compassionate counsel in matters of divorce, child custody, and family disputes. We prioritize amicable resolutions while vigorously protecting your family's interests, handling sensitive matters with the utmost discretion, care, and legal precision to ensure a smooth transition.",
-    image: "https://images.unsplash.com/photo-1591115765373-520f765ff793?auto=format&fit=crop&q=80&w=800"
+    image: "/family-law.png"
   },
   {
     icon: HomeIcon,

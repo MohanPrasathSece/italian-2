@@ -5,6 +5,7 @@ import { toast } from "@/hooks/use-toast";
 const Contact = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
     const [subject, setSubject] = useState("");
     const [message, setMessage] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,6 +32,7 @@ const Contact = () => {
                 body: JSON.stringify({
                     name,
                     email,
+                    phone,
                     subject,
                     message,
                 }),
@@ -49,6 +51,7 @@ const Contact = () => {
 
             setName("");
             setEmail("");
+            setPhone("");
             setSubject("");
             setMessage("");
         } catch (err) {
@@ -183,25 +186,37 @@ const Contact = () => {
                                             onChange={(e) => setEmail(e.target.value)}
                                         />
                                     </div>
+                                    <div className="space-y-2">
+                                        <label htmlFor="phone" className="font-body text-sm font-medium text-foreground">Mobile Number</label>
+                                        <input
+                                            type="tel"
+                                            id="phone"
+                                            className="w-full px-4 py-3 rounded-md border border-border bg-background focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-all font-body text-sm"
+                                            placeholder="+91 98765 43210"
+                                            value={phone}
+                                            onChange={(e) => setPhone(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label htmlFor="subject" className="font-body text-sm font-medium text-foreground">Subject</label>
+                                        <select
+                                            id="subject"
+                                            className="w-full px-4 py-3 rounded-md border border-border bg-background focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-all font-body text-sm"
+                                            value={subject}
+                                            onChange={(e) => setSubject(e.target.value)}
+                                        >
+                                            <option value="">Select a service</option>
+                                            <option value="real-estate">Real Estate & Property</option>
+                                            <option value="banking">Banking & Finance</option>
+                                            <option value="nbfc">NBFC Operations</option>
+                                            <option value="family">Family Disputes</option>
+                                            <option value="dispute">Dispute Resolution</option>
+                                            <option value="other">Other Inquiry</option>
+                                        </select>
+                                    </div>
                                 </div>
 
-                                <div className="space-y-2">
-                                    <label htmlFor="subject" className="font-body text-sm font-medium text-foreground">Subject</label>
-                                    <select
-                                        id="subject"
-                                        className="w-full px-4 py-3 rounded-md border border-border bg-background focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-all font-body text-sm"
-                                        value={subject}
-                                        onChange={(e) => setSubject(e.target.value)}
-                                    >
-                                        <option value="">Select a service</option>
-                                        <option value="real-estate">Real Estate & Property</option>
-                                        <option value="banking">Banking & Finance</option>
-                                        <option value="nbfc">NBFC Operations</option>
-                                        <option value="family">Family Disputes</option>
-                                        <option value="dispute">Dispute Resolution</option>
-                                        <option value="other">Other Inquiry</option>
-                                    </select>
-                                </div>
+
 
                                 <div className="space-y-2">
                                     <label htmlFor="message" className="font-body text-sm font-medium text-foreground">Message</label>
