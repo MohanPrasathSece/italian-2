@@ -111,7 +111,7 @@ const practiceAreas = [
   },
   {
     icon: Heart,
-    title: "Family Disputes",
+    title: "Matrimonial Disputes",
     desc: "Discreet and solution-oriented representation in matrimonial and family law matters.",
     image: "https://images.unsplash.com/photo-1591115765373-520f765ff793?auto=format&fit=crop&q=80&w=800"
   },
@@ -129,20 +129,20 @@ const practiceAreas = [
   },
   {
     icon: Users,
-    title: "MCOP and Consumer Court Cases",
+    title: "Consumer Court and MCOP Claims",
     desc: "Focused representation in motor accident claims and consumer protection litigation.",
     image: "https://images.unsplash.com/photo-1589216532372-1c2a367900d9?auto=format&fit=crop&q=80&w=800"
   },
   {
     icon: Scale,
-    title: "Dispute Resolution",
-    desc: "Strategic representation before High Courts, District Courts, and specialized tribunals across jurisdictions.",
+    title: "Alternative Dispute Resolution",
+    desc: "Efficient and amicable resolution of disputes through mediation, conciliation, and arbitration outside the courtroom.",
     image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=800"
   },
 ];
 
 const stats = [
-  { value: 5, suffix: "+", label: "Years of Experience" },
+  { value: 3, suffix: "+", label: "Years of Experience" },
   { value: 60, suffix: "+", label: "Cases" },
 ];
 
@@ -153,6 +153,7 @@ const faqs = [
   { q: "What are your legal fees and payment options?", a: "Our fees vary depending on the complexity and nature of the case. We offer transparent pricing and flexible payment arrangements. Contact us for a detailed consultation on fees." },
   { q: "How long does a typical legal case take?", a: "The timeline depends on the type and complexity of the case. During your initial consultation, we provide a realistic timeline and keep you informed throughout the process." },
   { q: "Do you offer pro bono legal services?", a: "Yes, KPJ Advocates is committed to access to justice. We selectively take on pro bono cases as part of our commitment to community service." },
+  { q: "Do you have offices anywhere else in TN?", a: "Our primary office is currently located in Thoothukudi. We are actively expanding and plan to open a new branch in Chennai in the near future." },
 ];
 
 const fadeInUp = {

@@ -37,14 +37,14 @@ const areas = [
   {
     icon: Scale,
     title: "Civil Law",
-    desc: "Our civil litigation team handles a wide range of disputes including contract breaches, property matters, personal injury, and consumer protection. We employ strategic litigation techniques and alternative dispute resolution to achieve the best outcomes, ensuring that every legal avenue is explored for our clients.",
+    desc: "We handle a wide range of disputes including contract breaches, property matters, personal injury, and consumer protection. We employ strategic litigation techniques and alternative dispute resolution to achieve the best outcomes, ensuring that every legal avenue is explored for our clients.",
     image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=800",
     imgAlt: "Civil law courtroom — KPJ Advocates civil litigation, Thoothukudi"
   },
   {
     icon: Shield,
     title: "Criminal Law",
-    desc: "From pre-trial investigation to courtroom defense, our criminal law team provides robust representation, ensuring your rights are protected. We handle cases ranging from white-collar crimes to serious offenses, bringing a meticulous approach to evidence analysis and defense strategy to secure justice.",
+    desc: "From pre-trial investigation to courtroom defense, we provide robust representation, ensuring your rights are protected. We handle cases ranging from white-collar crimes to serious offenses, bringing a meticulous approach to evidence analysis and defense strategy to secure justice.",
     image: "https://images.unsplash.com/photo-1589216532372-1c2a367900d9?auto=format&fit=crop&q=80&w=800",
     imgAlt: "Criminal law defense — KPJ Advocates criminal representation, Tamil Nadu"
   },
@@ -58,21 +58,21 @@ const areas = [
   {
     icon: Heart,
     title: "Family Law",
-    desc: "Our family law practice provides compassionate counsel in matters of divorce, child custody, and family disputes. We prioritize amicable resolutions while vigorously protecting your family's interests, handling sensitive matters with the utmost discretion, care, and legal precision to ensure a smooth transition.",
+    desc: "We provide compassionate counsel in matters of divorce, child custody, and family disputes. We prioritize amicable resolutions while vigorously protecting your family's interests, handling sensitive matters with the utmost discretion, care, and legal precision to ensure a smooth transition.",
     image: "/family-lawyer-thoothukudi.png",
     imgAlt: "Best Family Law Advocate in Thoothukudi — KPJ Advocates matrimonial disputes"
   },
   {
     icon: HomeIcon,
     title: "Property Law",
-    desc: "From residential purchases to commercial developments, our team handles conveyancing and land disputes with precision. We ensure that all property transactions are legally sound and that your ownership rights are fully protected through rigorous due diligence and clear, enforceable legal documentation.",
+    desc: "From residential purchases to commercial developments, we handle conveyancing and land disputes with precision. We ensure that all property transactions are legally sound and that your ownership rights are fully protected through rigorous due diligence and clear, enforceable legal documentation.",
     image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800",
     imgAlt: "Property law and real estate — KPJ Advocates property disputes, Tamil Nadu"
   },
   {
     icon: BookOpen,
     title: "Legal Consultation",
-    desc: "Our comprehensive legal consultation service provides expert analysis and strategic advice across all areas of law. Whether you need a one-time legal opinion or ongoing advisory services, our team of experts is dedicated to providing clarity, direction, and risk assessment for any legal challenge.",
+    desc: "We provide expert analysis and strategic advice across all areas of law. Whether you need a one-time legal opinion or ongoing advisory services, we are dedicated to providing clarity, direction, and risk assessment for any legal challenge.",
     image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=800",
     imgAlt: "Legal consultation session — KPJ Advocates expert legal advice, Thoothukudi"
   },

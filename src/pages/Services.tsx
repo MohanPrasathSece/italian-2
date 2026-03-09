@@ -18,11 +18,11 @@ const SERVICES_SCHEMA = {
     { "@type": "ListItem", "position": 2, "name": "Banking and Finance Law", "url": "https://kpjadvocates.com/services" },
     { "@type": "ListItem", "position": 3, "name": "Loan Recovery & SARFAESI Act", "url": "https://kpjadvocates.com/services" },
     { "@type": "ListItem", "position": 4, "name": "Legal Notices and Compliance", "url": "https://kpjadvocates.com/services" },
-    { "@type": "ListItem", "position": 5, "name": "Family Disputes", "url": "https://kpjadvocates.com/services" },
+    { "@type": "ListItem", "position": 5, "name": "Matrimonial Disputes", "url": "https://kpjadvocates.com/services" },
     { "@type": "ListItem", "position": 6, "name": "Non-Litigation Matters", "url": "https://kpjadvocates.com/services" },
     { "@type": "ListItem", "position": 7, "name": "NBFC Legal Operations", "url": "https://kpjadvocates.com/services" },
-    { "@type": "ListItem", "position": 8, "name": "MCOP and Consumer Court Cases", "url": "https://kpjadvocates.com/services" },
-    { "@type": "ListItem", "position": 9, "name": "Dispute Resolution", "url": "https://kpjadvocates.com/services" }
+    { "@type": "ListItem", "position": 8, "name": "Consumer Court and MCOP Claims", "url": "https://kpjadvocates.com/services" },
+    { "@type": "ListItem", "position": 9, "name": "Alternative Dispute Resolution", "url": "https://kpjadvocates.com/services" }
   ]
 };
 
@@ -104,7 +104,7 @@ const services = [
   },
   {
     icon: Users,
-    title: "Family Disputes",
+    title: "Matrimonial Disputes",
     desc: "Discreet and solution-oriented representation in matrimonial and family law matters.",
     points: ["Matrimonial Resolution", "Child Custody", "Property Partition", "Amicable Mediation"]
   },
@@ -121,16 +121,34 @@ const services = [
     points: ["Operational Compliance", "Recovery Functions", "Portfolio Auditing", "Regulatory Alignment"]
   },
   {
+    icon: Shield,
+    title: "Criminal Matters",
+    desc: "Robust defense representation including bail applications and comprehensive criminal trial advocacy.",
+    points: ["Bail Applications", "Criminal Defense", "Trial Advocacy", "Appeals"]
+  },
+  {
+    icon: Scale,
+    title: "Civil Litigation",
+    desc: "Expert representation in all types of civil disputes, ensuring your rights and interests are protected.",
+    points: ["Contract Disputes", "Property Matters", "Injunctions", "Civil Suits"]
+  },
+  {
+    icon: FileText,
+    title: "Legal Opinions & Documentation",
+    desc: "Thorough legal analysis, drafting of contracts, and comprehensive legal opinions for diverse situations.",
+    points: ["Legal Opinions", "Contract Drafting", "Title Scrutiny", "Agreement Reviews"]
+  },
+  {
     icon: Users,
-    title: "MCOP and Consumer Court Cases",
+    title: "Consumer Court and MCOP Claims",
     desc: "Focused representation in motor accident claims and consumer protection litigation.",
     points: ["Accident Claims", "Consumer Protection", "Insurance Disputes", "Court Representation"]
   },
   {
     icon: Scale,
-    title: "Dispute Resolution",
-    desc: "Strategic representation before High Courts, District Courts, and specialized tribunals.",
-    points: ["High Court Advocacy", "District Court Cases", "Tribunal Representation", "Strategic Litigation"]
+    title: "Alternative Dispute Resolution",
+    desc: "Efficient and amicable resolution of disputes through mediation, conciliation, and arbitration outside the courtroom.",
+    points: ["Mediation", "Conciliation", "Arbitration", "Negotiated Settlements"]
   },
 ];
 
@@ -139,6 +157,7 @@ const faqs = [
   { q: "What should I bring to my first consultation?", a: "Bring any relevant documents, contracts, correspondence, or evidence related to your matter. The more information you provide, the better we can assess your situation and advise accordingly." },
   { q: "Are virtual consultations available?", a: "Yes, we offer virtual consultations via video call for clients who prefer remote meetings. These are available for both initial consultations and ongoing case management." },
   { q: "How are your fees structured?", a: "We offer transparent, competitive pricing. Depending on the case, we may charge hourly rates, fixed fees, or contingency-based arrangements. Fees are discussed upfront during your initial consultation." },
+  { q: "Do you have offices anywhere else in TN?", a: "Our primary office is currently located in Thoothukudi. We are actively expanding and plan to open a new branch in Chennai in the near future." },
 ];
 
 const Services = () => (
