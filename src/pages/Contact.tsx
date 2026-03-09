@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
 
@@ -67,6 +68,17 @@ const Contact = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Contact Us | KPJ Advocates | Schedule Your Consultation</title>
+                <meta name="description" content="Get in touch with KPJ Advocates in Thoothukudi. Contact us for legal advice, case consultations, and expert representation in Tamil Nadu. Call +91 95003 26495." />
+                <meta name="keywords" content="Advocate contact number Thoothukudi, Law firm office Tuticorin, Legal advice Tamil Nadu, Lawyer consultation, KPJ Advocates address, Hire a lawyer Thoothukudi" />
+                <link rel="canonical" href="https://kpjadvocates.com/contact" />
+
+                <meta property="og:title" content="Contact KPJ Advocates | Professional Legal Support" />
+                <meta property="og:description" content="Reach out today for dedicated legal support. We're here to help you navigate your legal challenges." />
+                <meta property="og:url" content="https://kpjadvocates.com/contact" />
+            </Helmet>
+
             {/* Hero Section */}
             <section className="bg-primary py-20 lg:py-28 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-10">

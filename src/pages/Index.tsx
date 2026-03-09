@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Scale, Shield, Users, Award, Briefcase, Heart, Home as HomeIcon, BookOpen, ChevronRight, Landmark, FileText } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
@@ -88,6 +89,19 @@ const fadeInUp = {
 const Index = () => {
   return (
     <>
+      <Helmet>
+        <title>KPJ Advocates | Best Law Firm in Thoothukudi | Expert Legal Consultation</title>
+        <meta name="description" content="KPJ Advocates is a leading law firm in Thoothukudi, Tamil Nadu. Expert legal services in Civil, Criminal, Property, and Family Law cases. Schedule your consultation with our experienced advocates today." />
+        <meta name="keywords" content="KPJ Advocates, Law firm in Thoothukudi, Best lawyer in Tuticorin, Civil advocate Thoothukudi, Property law experts, Criminal defense lawyer Tamil Nadu, Top law firm for family disputes, Legal notices Thoothukudi, NBFC legal support" />
+        <link rel="canonical" href="https://kpjadvocates.com/" />
+
+        <meta property="og:title" content="KPJ Advocates | Expert Legal Solutions in Thoothukudi" />
+        <meta property="og:description" content="Experience justice with integrity. Specialized legal services for civil, property, and corporate cases in Thoothukudi." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://kpjadvocates.com/" />
+        <meta property="og:image" content="https://kpjadvocates.com/kpj_main_logo.png" />
+      </Helmet>
+
       {/* Hero */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0">

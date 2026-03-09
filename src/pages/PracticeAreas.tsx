@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Scale, Shield, Briefcase, Heart, Home as HomeIcon, BookOpen, ChevronRight } from "lucide-react";
 
 const areas = [
@@ -42,6 +43,17 @@ const areas = [
 
 const PracticeAreas = () => (
   <>
+    <Helmet>
+      <title>Legal Practice Areas | KPJ Advocates | Comprehensive Legal Support</title>
+      <meta name="description" content="Explore KPJ Advocates' wide range of legal services including Civil, Criminal, Corporate, Family, and Property Law in Thoothukudi. Decades of combined experience." />
+      <meta name="keywords" content="Civil Law, Criminal Law, Corporate Law, Family Law, Property Law, Legal Consultation, Legal Expertise, Law Firm Practice, Top Lawyers Thoothukudi" />
+      <link rel="canonical" href="https://kpjadvocates.com/practice-areas" />
+
+      <meta property="og:title" content="Expert Legal Services | Practice Areas | KPJ Advocates" />
+      <meta property="og:description" content="Discover our specialized legal expertise. We handle complex civil, criminal, and corporate matters in Tamil Nadu." />
+      <meta property="og:url" content="https://kpjadvocates.com/practice-areas" />
+    </Helmet>
+
     {/* Page Header */}
     <section className="py-20 lg:py-28 bg-primary">
       <div className="container mx-auto px-4 lg:px-8 text-center">
