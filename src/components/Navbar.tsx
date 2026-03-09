@@ -146,7 +146,7 @@ const Navbar = () => {
                       setOpen(false);
                       window.scrollTo(0, 0);
                     }}
-                    className="flex justify-center items-center w-full py-4 rounded-2xl bg-gold text-white font-heading text-xs font-bold tracking-[0.15em] uppercase shadow-lg shadow-gold/20"
+                    className="flex justify-center items-center w-full py-4 rounded-2xl bg-primary text-white font-heading text-xs font-bold tracking-[0.15em] uppercase shadow-lg shadow-primary/20"
                   >
                     Request a Consultation
                   </Link>
