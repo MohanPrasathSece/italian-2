@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { ChevronRight, Scale, Eye, Shield, Users } from "lucide-react";
 import lawyerImg from "@/assets/jedidah koilson.jpeg";
 import chooseUsImg from "@/assets/courtroom-excellence.png";
@@ -14,6 +15,42 @@ const values = [
 const About = () => {
   return (
     <>
+      <Helmet>
+        <title>About P. J. Jedidiah Koilson | KPJ Advocates | Legal Legacy</title>
+        <meta name="description" content="Learn about P. J. Jedidiah Koilson, Lead Advocate at KPJ Advocates. Over 25 years of legal legacy in Thoothukudi, specializing in compassionate and strategic legal advocacy." />
+        <meta name="keywords" content="P. J. Jedidiah Koilson, Jedidiah Koilson, Jedediah Koilson, Jedidiyah Koilson, Judidiah Koilson, Jedideya Koilson, P J Jedidiah, Law Firm History, Legal Legacy Thoothukudi, K. Pon James, Professional Lawyer Profile" />
+        <link rel="canonical" href="https://kpjadvocates.com/about" />
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "@id": "https://kpjadvocates.com/about#person",
+            "name": "P. J. Jedidiah Koilson",
+            "alternateName": ["Jedidiah Koilson", "Jedediah Koilson", "Jedidiyah Koilson", "Judidiah Koilson", "Jedideya Koilson", "P.J. Jedidiah", "Koilson Advocate"],
+            "description": "Lead Advocate at KPJ Advocates, specializing in Civil and Criminal law in Thoothukudi, Tamil Nadu.",
+            "image": "https://kpjadvocates.com/src/assets/jedidah%20koilson.jpeg",
+            "jobTitle": "Lead Advocate",
+            "worksFor": {
+              "@id": "https://kpjadvocates.com/#organization"
+            },
+            "url": "https://kpjadvocates.com/about",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Thoothukudi",
+              "addressRegion": "Tamil Nadu",
+              "addressCountry": "IN"
+            },
+            "knowsAbout": ["Civil Law", "Criminal Law", "Property Law", "Family Law", "Banking Law"],
+            "honorificSuffix": "B.A., LL.B"
+          })}
+        </script>
+
+        <meta property="og:title" content="Meet P. J. Jedidiah Koilson | Lead Advocate at KPJ Advocates" />
+        <meta property="og:description" content="Discover the story and expertise behind KPJ Advocates. Led by P. J. Jedidiah Koilson, we carry forward a legacy of justice." />
+        <meta property="og:url" content="https://kpjadvocates.com/about" />
+      </Helmet>
+
       {/* Header */}
       <section className="py-20 lg:py-28 bg-primary">
         <div className="container mx-auto px-4 lg:px-8 text-center">

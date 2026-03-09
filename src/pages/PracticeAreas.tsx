@@ -44,13 +44,13 @@ const areas = [
 const PracticeAreas = () => (
   <>
     <Helmet>
-      <title>Legal Practice Areas | KPJ Advocates | Comprehensive Legal Support</title>
-      <meta name="description" content="Explore KPJ Advocates' wide range of legal services including Civil, Criminal, Corporate, Family, and Property Law in Thoothukudi. Decades of combined experience." />
-      <meta name="keywords" content="Civil Law, Criminal Law, Corporate Law, Family Law, Property Law, Legal Consultation, Legal Expertise, Law Firm Practice, Top Lawyers Thoothukudi" />
+      <title>Legal Practice Areas | KPJ Advocates | P. J. Jedidiah Koilson</title>
+      <meta name="description" content="Explore KPJ Advocates' wide range of legal services including Civil, Criminal, Corporate, Family, and Property Law in Thoothukudi. Led by P. J. Jedidiah Koilson." />
+      <meta name="keywords" content="P. J. Jedidiah Koilson, Jedidiah Koilson, Jedediah Koilson, Jedidiyah Koilson, Judidiah Koilson, Civil Law, Criminal Law, Corporate Law, Family Law, Property Law, Legal Consultation, Top Lawyers Thoothukudi" />
       <link rel="canonical" href="https://kpjadvocates.com/practice-areas" />
 
       <meta property="og:title" content="Expert Legal Services | Practice Areas | KPJ Advocates" />
-      <meta property="og:description" content="Discover our specialized legal expertise. We handle complex civil, criminal, and corporate matters in Tamil Nadu." />
+      <meta property="og:description" content="Discover our specialized legal expertise. We handle complex civil, criminal, and corporate matters in Tamil Nadu. Led by P. J. Jedidiah Koilson." />
       <meta property="og:url" content="https://kpjadvocates.com/practice-areas" />
     </Helmet>
 

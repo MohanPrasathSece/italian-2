@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { ChevronRight, FileText, Users, Briefcase, Shield, MessageSquare, Landmark, Scale, BookOpen } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
@@ -77,6 +78,17 @@ const faqs = [
 
 const Services = () => (
   <>
+    <Helmet>
+      <title>Legal Services | KPJ Advocates | P. J. Jedidiah Koilson</title>
+      <meta name="description" content="Explore the comprehensive legal services offered by KPJ Advocates in Thoothukudi. Specialized in Civil, Criminal, Property, and Banking law by P. J. Jedidiah Koilson." />
+      <meta name="keywords" content="P. J. Jedidiah Koilson, Jedidiah Koilson, Jedediah Koilson, Jedidiyah Koilson, Judidiah Koilson, Property law Thoothukudi, Banking lawyer Tamil Nadu, SARFAESI Act expert, Family law consultation" />
+      <link rel="canonical" href="https://kpjadvocates.com/services" />
+
+      <meta property="og:title" content="Expert Legal Services in Thoothukudi | KPJ Advocates" />
+      <meta property="og:description" content="Providing high-stakes legal solutions for property, banking, and civil disputes. Led by P. J. Jedidiah Koilson." />
+      <meta property="og:url" content="https://kpjadvocates.com/services" />
+    </Helmet>
+
     {/* Page Header */}
     <section className="py-20 lg:py-32 bg-primary relative overflow-hidden">
       <div className="absolute inset-0 opacity-10">

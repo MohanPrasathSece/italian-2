@@ -90,13 +90,50 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>KPJ Advocates | Best Law Firm in Thoothukudi | Expert Legal Consultation</title>
-        <meta name="description" content="KPJ Advocates is a leading law firm in Thoothukudi, Tamil Nadu. Expert legal services in Civil, Criminal, Property, and Family Law cases. Schedule your consultation with our experienced advocates today." />
-        <meta name="keywords" content="KPJ Advocates, Law firm in Thoothukudi, Best lawyer in Tuticorin, Civil advocate Thoothukudi, Property law experts, Criminal defense lawyer Tamil Nadu, Top law firm for family disputes, Legal notices Thoothukudi, NBFC legal support" />
+        <title>KPJ Advocates | Best Law Firm in Thoothukudi | P. J. Jedidiah Koilson</title>
+        <meta name="description" content="KPJ Advocates, led by P. J. Jedidiah Koilson, is a premier law firm in Thoothukudi. We specialize in Civil, Criminal, Property, and Family law with a focus on Justice, Integrity, and Excellence." />
+        <meta name="keywords" content="P. J. Jedidiah Koilson, Jedidiah Koilson, Jedediah Koilson, Jedidiyah Koilson, P J Jedidiah, Koilson Advocate, KPJ Advocates, Best Law Firm Thoothukudi, Top Advocate Tuticorin, Legal Expert Tamil Nadu, Civil Lawyer Thoothukudi, Property Law Expert, Family Dispute Lawyer, Judidiah Koilson, Jedideya Koilson" />
         <link rel="canonical" href="https://kpjadvocates.com/" />
 
-        <meta property="og:title" content="KPJ Advocates | Expert Legal Solutions in Thoothukudi" />
-        <meta property="og:description" content="Experience justice with integrity. Specialized legal services for civil, property, and corporate cases in Thoothukudi." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LegalService",
+            "@id": "https://kpjadvocates.com/#organization",
+            "name": "KPJ Advocates",
+            "alternateName": ["KPJ Law Firm", "KPJ Advocates & Solicitors"],
+            "url": "https://kpjadvocates.com/",
+            "logo": "https://kpjadvocates.com/kpj_main_logo.png",
+            "image": "https://kpjadvocates.com/kpj_main_logo.png",
+            "founder": {
+              "@type": "Person",
+              "id": "https://kpjadvocates.com/about#person",
+              "name": "P. J. Jedidiah Koilson",
+              "alternateName": ["Jedidiah Koilson", "Jedediah Koilson", "Jedidiyah Koilson", "P.J. Jedidiah", "Koilson Advocate", "Judidiah Koilson", "Jedideya Koilson", "P J Jedidiah Koilson"],
+              "jobTitle": "Lead Advocate",
+              "url": "https://kpjadvocates.com/about"
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "No. 46/24A, 1st floor, Pearl Plaza, Devarpuram Road",
+              "addressLocality": "Thoothukudi",
+              "addressRegion": "Tamil Nadu",
+              "postalCode": "628003",
+              "addressCountry": "IN"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": "8.8105",
+              "longitude": "78.1408"
+            },
+            "telephone": "+91 95003 26495",
+            "priceRange": "$$",
+            "openingHours": "Mo-Fr 09:00-18:00, Sa 10:00-14:00"
+          })}
+        </script>
+
+        <meta property="og:title" content="KPJ Advocates | P. J. Jedidiah Koilson | Expert Legal Solutions in Thoothukudi" />
+        <meta property="og:description" content="Professional legal advocacy led by P. J. Jedidiah Koilson. Committed to justice, integrity, and client success." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://kpjadvocates.com/" />
         <meta property="og:image" content="https://kpjadvocates.com/kpj_main_logo.png" />
