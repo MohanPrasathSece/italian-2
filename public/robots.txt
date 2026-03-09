@@ -1,4 +1,45 @@
+# ════════════════════════════════════════════════════════════
+# KPJ Advocates — Elite Crawl & Indexing Control
+# Entity: P. J. Jedidiah Koilson | kpjadvocates.com
+# ════════════════════════════════════════════════════════════
+
+# ── Allow all major search engine bots ──
 User-agent: *
 Allow: /
 
+# ── Disallow non-content paths ──
+Disallow: /api/
+Disallow: /.netlify/
+Disallow: /node_modules/
+
+# ── Explicit Googlebot permissions (max crawl signals) ──
+User-agent: Googlebot
+Allow: /
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.ico$
+Disallow: /api/
+Disallow: /.netlify/
+
+# ── Image bot access for visual entity reinforcement ──
+User-agent: Googlebot-Image
+Allow: /
+
+# ── Mobile Googlebot ──
+User-agent: Googlebot-Mobile
+Allow: /
+
+# ── Bingbot ──
+User-agent: Bingbot
+Allow: /
+
+# ── Sitemap declaration ──
 Sitemap: https://kpjadvocates.com/sitemap.xml
+
+# ── Crawl delay (optional — remove if Netlify functions have no rate limit) ──
+Crawl-delay: 0

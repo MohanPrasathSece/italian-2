@@ -1,0 +1,17 @@
+# ════════════════════════════════════════════════════════════
+# KPJ Advocates — Netlify _redirects
+# Entity: P. J. Jedidiah Koilson | kpjadvocates.com
+# ════════════════════════════════════════════════════════════
+
+# ── Enforce HTTPS and www canonicalization ──
+# Forces all traffic to https://kpjadvocates.com (non-www, HTTPS)
+# This prevents duplicate content — a critical Google ranking factor.
+http://www.kpjadvocates.com/*  https://kpjadvocates.com/:splat  301!
+https://www.kpjadvocates.com/* https://kpjadvocates.com/:splat  301!
+
+# ── Serverless functions ──
+/sitemap.xml  /.netlify/functions/sitemap  200
+/robots.txt   /.netlify/functions/robots   200
+
+# ── SPA fallback ──
+/*  /index.html  200

@@ -1,13 +1,89 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Scale, Shield, Users, Award, Briefcase, Heart, Home as HomeIcon, BookOpen, ChevronRight, Landmark, FileText } from "lucide-react";
+import { Scale, Shield, Users, Briefcase, Heart, Home as HomeIcon, BookOpen, ChevronRight, Landmark, FileText } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
-import heroImg from "@/assets/hero_bg_@.jpg";
-import lawyerImg from "@/assets/jedidah koilson.jpeg";
-
 import Counter from "@/components/Counter";
 
+// ──────────────────────────────────────────────────────────────────
+// SEO IMAGES — Root-level SEO optimized filenames
+// ──────────────────────────────────────────────────────────────────
+const heroImg = "/advocate-office-thoothukudi.jpg";
+const lawyerImg = "/best-advocate-in-thoothukudi-jedidiah-koilson.jpeg";
+
+// ──────────────────────────────────────────────────────────────────
+// SEO CONSTANTS — Entity signals for P. J. Jedidiah Koilson
+// ──────────────────────────────────────────────────────────────────
+const PERSON_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://kpjadvocates.com/about#person",
+  "name": "P. J. Jedidiah Koilson",
+  "givenName": "Jedidiah",
+  "familyName": "Koilson",
+  "alternateName": [
+    "Jedidiah Koilson",
+    "Jedediah Koilson",
+    "Jedidiyah Koilson",
+    "Jedideya Koilson",
+    "Judidiah Koilson",
+    "P.J. Jedidiah",
+    "P J Jedidiah Koilson",
+    "Koilson Advocate"
+  ],
+  "honorificSuffix": "B.A., LL.B",
+  "jobTitle": "Advocate",
+  "worksFor": { "@id": "https://kpjadvocates.com/#organization" },
+  "url": "https://kpjadvocates.com/about",
+  "sameAs": ["https://kpjadvocates.com/", "https://kpjadvocates.com/about"]
+};
+
+const LEGAL_SERVICE_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": ["LegalService", "LocalBusiness"],
+  "@id": "https://kpjadvocates.com/#organization",
+  "name": "KPJ Advocates",
+  "alternateName": ["KPJ Law Firm", "KPJ Advocates & Solicitors"],
+  "url": "https://kpjadvocates.com/",
+  "logo": "https://kpjadvocates.com/kpj-advocates-thoothukudi-logo.png",
+  "image": "https://kpjadvocates.com/kpj-advocates-thoothukudi-logo.png",
+  "telephone": "+91-95003-26495",
+  "email": "info@kpjadvocates.com",
+  "founder": { "@id": "https://kpjadvocates.com/about#person" },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "No. 46/24A, 1st floor, Pearl Plaza, Devarpuram Road",
+    "addressLocality": "Thoothukudi",
+    "addressRegion": "Tamil Nadu",
+    "postalCode": "628003",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "8.8105",
+    "longitude": "78.1408"
+  },
+  "openingHours": "Mo-Fr 09:00-18:00, Sa 10:00-14:00",
+  "priceRange": "$$",
+  "areaServed": [
+    { "@type": "City", "name": "Thoothukudi" },
+    { "@type": "AdministrativeArea", "name": "Tamil Nadu" }
+  ],
+  "sameAs": [
+    "https://kpjadvocates.com/",
+    "https://www.google.com/maps/search/?api=1&query=KPJ+Advocates+Thoothukudi"
+  ]
+};
+
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://kpjadvocates.com/" }
+  ]
+};
+
+// ──────────────────────────────────────────────────────────────────
 const practiceAreas = [
   {
     icon: HomeIcon,
@@ -90,59 +166,51 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>KPJ Advocates | Best Law Firm in Thoothukudi | P. J. Jedidiah Koilson</title>
-        <meta name="description" content="KPJ Advocates, led by P. J. Jedidiah Koilson, is a premier law firm in Thoothukudi. We specialize in Civil, Criminal, Property, and Family law with a focus on Justice, Integrity, and Excellence." />
-        <meta name="keywords" content="P. J. Jedidiah Koilson, Jedidiah Koilson, Jedediah Koilson, Jedidiyah Koilson, P J Jedidiah, Koilson Advocate, KPJ Advocates, Best Law Firm Thoothukudi, Top Advocate Tuticorin, Legal Expert Tamil Nadu, Civil Lawyer Thoothukudi, Property Law Expert, Family Dispute Lawyer, Judidiah Koilson, Jedideya Koilson" />
+        {/* ── SEO Title: Local Dominance First ── */}
+        <title>Best Advocate in Thoothukudi | P. J. Jedidiah Koilson | KPJ Advocates</title>
+
+        {/* ── Entity-rich description ── */}
+        <meta name="description" content="Ranked #1 Advocate in Thoothukudi (Tuticorin). P. J. Jedidiah Koilson at KPJ Advocates specializes in Civil, Criminal, Property, and Family Law cases. Top-rated legal services across Tamil Nadu." />
+
+        {/* ── Local & Branded Keywords ── */}
+        <meta name="keywords" content="Best advocate in Thoothukudi, Best advocate in Tuticorin, Top lawyer in Thoothukudi, Criminal lawyer in Thoothukudi, Advocate near me Thoothukudi, Best legal services in Thoothukudi, Tuticorin advocate office, Advocate in Thoothukudi court, P. J. Jedidiah Koilson, Jedidiah Koilson, Jedediah Koilson, Jedidiyah Koilson, KPJ Advocates, Tuticorin lawyer" />
+
         <link rel="canonical" href="https://kpjadvocates.com/" />
 
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LegalService",
-            "@id": "https://kpjadvocates.com/#organization",
-            "name": "KPJ Advocates",
-            "alternateName": ["KPJ Law Firm", "KPJ Advocates & Solicitors"],
-            "url": "https://kpjadvocates.com/",
-            "logo": "https://kpjadvocates.com/kpj_main_logo.png",
-            "image": "https://kpjadvocates.com/kpj_main_logo.png",
-            "founder": {
-              "@type": "Person",
-              "id": "https://kpjadvocates.com/about#person",
-              "name": "P. J. Jedidiah Koilson",
-              "alternateName": ["Jedidiah Koilson", "Jedediah Koilson", "Jedidiyah Koilson", "P.J. Jedidiah", "Koilson Advocate", "Judidiah Koilson", "Jedideya Koilson", "P J Jedidiah Koilson"],
-              "jobTitle": "Lead Advocate",
-              "url": "https://kpjadvocates.com/about"
-            },
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "No. 46/24A, 1st floor, Pearl Plaza, Devarpuram Road",
-              "addressLocality": "Thoothukudi",
-              "addressRegion": "Tamil Nadu",
-              "postalCode": "628003",
-              "addressCountry": "IN"
-            },
-            "geo": {
-              "@type": "GeoCoordinates",
-              "latitude": "8.8105",
-              "longitude": "78.1408"
-            },
-            "telephone": "+91 95003 26495",
-            "priceRange": "$$",
-            "openingHours": "Mo-Fr 09:00-18:00, Sa 10:00-14:00"
-          })}
-        </script>
+        {/* ── Entity Schema: Person (primary) ── */}
+        <script type="application/ld+json">{JSON.stringify(PERSON_SCHEMA)}</script>
 
-        <meta property="og:title" content="KPJ Advocates | P. J. Jedidiah Koilson | Expert Legal Solutions in Thoothukudi" />
-        <meta property="og:description" content="Professional legal advocacy led by P. J. Jedidiah Koilson. Committed to justice, integrity, and client success." />
+        {/* ── Entity Schema: LegalService (bidirectional) ── */}
+        <script type="application/ld+json">{JSON.stringify(LEGAL_SERVICE_SCHEMA)}</script>
+
+        {/* ── Breadcrumb Schema ── */}
+        <script type="application/ld+json">{JSON.stringify(BREADCRUMB_SCHEMA)}</script>
+
+        {/* ── Open Graph ── */}
+        <meta property="og:title" content="Best Advocate in Thoothukudi | P. J. Jedidiah Koilson | KPJ Advocates" />
+        <meta property="og:description" content="Expert legal advocacy in Thoothukudi. Ranked #1 for Civil, Property, and Criminal matters. Led by P. J. Jedidiah Koilson." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://kpjadvocates.com/" />
-        <meta property="og:image" content="https://kpjadvocates.com/kpj_main_logo.png" />
+        <meta property="og:image" content="https://kpjadvocates.com/kpj-advocates-thoothukudi-logo.png" />
+        <meta property="og:image:alt" content="Best Lawyer in Thoothukudi — KPJ Advocates Logo" />
+        <meta property="og:site_name" content="KPJ Advocates" />
+        <meta property="og:locale" content="en_IN" />
+
+        {/* ── Twitter Card ── */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Best Advocate in Thoothukudi | P. J. Jedidiah Koilson" />
+        <meta name="twitter:description" content="Leading Law Firm in Thoothukudi. Civil, Property, Criminal & Family Law." />
+        <meta name="twitter:image" content="https://kpjadvocates.com/kpj-advocates-thoothukudi-logo.png" />
       </Helmet>
 
       {/* Hero */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroImg} alt="Legal background" className="w-full h-full object-cover" />
+          <img
+            src={heroImg}
+            alt="KPJ Advocates law firm interior, Thoothukudi — P. J. Jedidiah Koilson"
+            className="w-full h-full object-cover"
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50" />
         </div>
         <div className="relative container mx-auto px-4 lg:px-8 py-20 pt-32">
@@ -205,7 +273,7 @@ const Index = () => {
             >
               <img
                 src={lawyerImg}
-                alt="P. J. JEDIDIAH KOILSON B.A., LL.B, Advocate at KPJ Advocates"
+                alt="P. J. Jedidiah Koilson B.A. LL.B — Lead Advocate at KPJ Advocates, Thoothukudi"
                 className="rounded-2xl shadow-xl w-full max-w-md mx-auto object-cover aspect-[4/5] mb-6"
               />
               <div className="text-center">
@@ -291,8 +359,6 @@ const Index = () => {
         </div>
       </section>
 
-
-
       {/* Our Approach Section */}
       <section className="py-20 lg:py-28 bg-background border-t border-border">
         <div className="container mx-auto px-4 lg:px-8">
@@ -322,9 +388,7 @@ const Index = () => {
                   <span className="font-heading text-xl font-bold text-accent">{step.id}</span>
                 </div>
                 <h3 className="font-heading text-xl font-bold text-foreground mb-4">{step.title}</h3>
-                <p className="font-body text-base text-muted-foreground leading-relaxed">
-                  {step.desc}
-                </p>
+                <p className="font-body text-base text-muted-foreground leading-relaxed">{step.desc}</p>
               </motion.div>
             ))}
           </div>

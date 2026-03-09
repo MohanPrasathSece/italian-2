@@ -3,14 +3,6 @@ function getEnv(name) {
   return typeof value === "string" && value.trim() !== "" ? value.trim() : undefined;
 }
 
-function requiredEnv(name) {
-  const value = getEnv(name);
-  if (!value) {
-    throw new Error(`Missing required environment variable: ${name}`);
-  }
-  return value;
-}
-
 function normalizeBaseUrl(url) {
   return url.replace(/\/+$/, "");
 }
@@ -26,33 +18,85 @@ function xmlEscape(input) {
 
 exports.handler = async () => {
   try {
-    const SITE_URL = normalizeBaseUrl(requiredEnv("SITE_URL"));
-
-    // Keep this aligned with react-router-dom routes.
-    const routes = ["/", "/practice-areas", "/about", "/services", "/contact"];
+    const SITE_URL = normalizeBaseUrl(
+      getEnv("SITE_URL") || "https://kpjadvocates.com"
+    );
 
     const now = new Date().toISOString();
 
+    // ── Routes with per-page SEO priorities & image metadata ──
+    const routes = [
+      {
+        path: "/",
+        changefreq: "weekly",
+        priority: "1.0",
+        imageUrl: `${SITE_URL}/kpj-advocates-thoothukudi-logo.png`,
+        imageTitle: "Best Advocate in Thoothukudi | KPJ Advocates | P. J. Jedidiah Koilson",
+        imageCaption: "Official logo of KPJ Advocates — #1 Rated Law Firm in Thoothukudi, led by Advocate P. J. Jedidiah Koilson."
+      },
+      {
+        path: "/about",
+        changefreq: "weekly",
+        priority: "0.95",
+        imageUrl: `${SITE_URL}/best-advocate-in-thoothukudi-jedidiah-koilson.jpeg`,
+        imageTitle: "P. J. Jedidiah Koilson — Best Advocate in Thoothukudi",
+        imageCaption: "Ranked #1 Advocate in Thoothukudi, P. J. Jedidiah Koilson B.A. LL.B — Lead Advocate at KPJ Advocates."
+      },
+      {
+        path: "/practice-areas",
+        changefreq: "weekly",
+        priority: "0.90",
+        imageUrl: `${SITE_URL}/family-lawyer-thoothukudi.png`,
+        imageTitle: "Top Legal Services in Thoothukudi | Practice Areas",
+        imageCaption: "Comprehensive legal practice areas including Civil, Property, and Family Law in Thoothukudi."
+      },
+      {
+        path: "/services",
+        changefreq: "weekly",
+        priority: "0.85"
+      },
+      {
+        path: "/contact",
+        changefreq: "monthly",
+        priority: "0.85"
+      }
+    ];
+
     const urlset = routes
-      .map((path) => {
-        const loc = `${SITE_URL}${path}`;
+      .map((route) => {
+        const loc = xmlEscape(`${SITE_URL}${route.path}`);
+        const imageBlock =
+          route.imageUrl
+            ? [
+              "    <image:image>",
+              `      <image:loc>${xmlEscape(route.imageUrl)}</image:loc>`,
+              `      <image:title>${xmlEscape(route.imageTitle)}</image:title>`,
+              `      <image:caption>${xmlEscape(route.imageCaption)}</image:caption>`,
+              "    </image:image>"
+            ].join("\n")
+            : "";
         return [
           "  <url>",
-          `    <loc>${xmlEscape(loc)}</loc>`,
+          `    <loc>${loc}</loc>`,
           `    <lastmod>${xmlEscape(now)}</lastmod>`,
-          "    <changefreq>weekly</changefreq>",
-          path === "/" ? "    <priority>1.0</priority>" : "    <priority>0.8</priority>",
-          "  </url>",
-        ].join("\n");
+          `    <changefreq>${route.changefreq}</changefreq>`,
+          `    <priority>${route.priority}</priority>`,
+          imageBlock,
+          "  </url>"
+        ]
+          .filter(Boolean)
+          .join("\n");
       })
       .join("\n");
 
     const xml = [
-      "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
-      "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">",
+      '<?xml version="1.0" encoding="UTF-8"?>',
+      '<urlset',
+      '  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
+      '  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">',
       urlset,
       "</urlset>",
-      "",
+      ""
     ].join("\n");
 
     return {
@@ -60,14 +104,15 @@ exports.handler = async () => {
       headers: {
         "content-type": "application/xml; charset=utf-8",
         "cache-control": "public, max-age=0, s-maxage=3600",
+        "x-content-type-options": "nosniff"
       },
-      body: xml,
+      body: xml
     };
   } catch (err) {
     return {
       statusCode: 500,
       headers: { "content-type": "text/plain; charset=utf-8" },
-      body: err instanceof Error ? err.message : "Server error",
+      body: err instanceof Error ? err.message : "Server error"
     };
   }
 };

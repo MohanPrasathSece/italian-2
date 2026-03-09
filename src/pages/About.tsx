@@ -1,57 +1,183 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ChevronRight, Scale, Eye, Shield, Users } from "lucide-react";
-import lawyerImg from "@/assets/jedidah koilson.jpeg";
-import chooseUsImg from "@/assets/courtroom-excellence.png";
+// ──────────────────────────────────────────────────────────────────
+// SEO IMAGES — Root-level SEO optimized filenames
+// ──────────────────────────────────────────────────────────────────
+const lawyerImg = "/best-advocate-in-thoothukudi-jedidiah-koilson.jpeg";
+const chooseUsImg = "/top-lawyer-thoothukudi-court.png";
 
+// ──────────────────────────────────────────────────────────────────
+// PERSON SCHEMA — The core entity page. This is where Google
+// builds its understanding of "P. J. Jedidiah Koilson" as an entity.
+// ──────────────────────────────────────────────────────────────────
+const PERSON_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://kpjadvocates.com/about#person",
+  "name": "P. J. Jedidiah Koilson",
+  "givenName": "Jedidiah",
+  "familyName": "Koilson",
+  "additionalName": "P. J.",
+  "alternateName": [
+    "Jedidiah Koilson",
+    "Jedediah Koilson",
+    "Jedidiyah Koilson",
+    "Jedideya Koilson",
+    "Judidiah Koilson",
+    "Jedida Koilson",
+    "Jedidaih Koilson",
+    "P.J. Jedidiah",
+    "P J Jedidiah Koilson",
+    "Koilson Advocate",
+    "Koilson Lawyer Thoothukudi"
+  ],
+  "honorificSuffix": "B.A., LL.B",
+  "jobTitle": "Advocate",
+  "description": "P. J. Jedidiah Koilson is a professional Advocate enrolled under the Bar Council of Tamil Nadu & Puducherry, practising at KPJ Advocates, Thoothukudi. Specializes in Civil, Criminal, Property, Banking, and Family Law.",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://kpjadvocates.com/best-advocate-in-thoothukudi-jedidiah-koilson.jpeg",
+    "name": "P. J. Jedidiah Koilson — Advocate, KPJ Advocates Thoothukudi",
+    "description": "Professional portrait of Advocate P. J. Jedidiah Koilson, Lead Advocate at KPJ Advocates, Thoothukudi, Tamil Nadu",
+    "width": "800",
+    "height": "1000"
+  },
+  "url": "https://kpjadvocates.com/about",
+  "email": "info@kpjadvocates.com",
+  "telephone": "+91-95003-26495",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "No. 46/24A, 1st floor, Pearl Plaza, Devarpuram Road",
+    "addressLocality": "Thoothukudi",
+    "addressRegion": "Tamil Nadu",
+    "postalCode": "628003",
+    "addressCountry": "IN"
+  },
+  "worksFor": {
+    "@id": "https://kpjadvocates.com/#organization"
+  },
+  "knowsAbout": [
+    "Civil Law",
+    "Criminal Law",
+    "Property Law",
+    "Family Law",
+    "Banking Law",
+    "SARFAESI Act",
+    "Insolvency and Bankruptcy Code",
+    "NBFC Legal Operations",
+    "Consumer Court Cases",
+    "Legal Notices and Compliance"
+  ],
+  "hasCredential": {
+    "@type": "EducationalOccupationalCredential",
+    "name": "Enrolment under Bar Council of Tamil Nadu & Puducherry",
+    "credentialCategory": "license",
+    "recognizedBy": {
+      "@type": "Organization",
+      "name": "Bar Council of Tamil Nadu and Puducherry"
+    }
+  },
+  "sameAs": [
+    "https://kpjadvocates.com/",
+    "https://kpjadvocates.com/about",
+    "https://www.google.com/maps/search/?api=1&query=KPJ+Advocates+Thoothukudi"
+  ]
+};
+
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://kpjadvocates.com/" },
+    { "@type": "ListItem", "position": 2, "name": "About — P. J. Jedidiah Koilson", "item": "https://kpjadvocates.com/about" }
+  ]
+};
+
+const PROFILE_PAGE_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "url": "https://kpjadvocates.com/about",
+  "name": "About P. J. Jedidiah Koilson | Advocate | KPJ Advocates",
+  "description": "Professional profile and background of P. J. Jedidiah Koilson, Lead Advocate at KPJ Advocates, Thoothukudi.",
+  "mainEntity": { "@id": "https://kpjadvocates.com/about#person" },
+  "isPartOf": { "@id": "https://kpjadvocates.com/#website" },
+  "inLanguage": "en-IN"
+};
+
+// ──────────────────────────────────────────────────────────────────
 
 const values = [
-  { icon: Scale, title: "Justice", desc: "Inspired by the Roman tradition of Justitia, we uphold fairness and equity in every case.", image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=800" },
-  { icon: Eye, title: "Transparency", desc: "We believe in open communication and honest counsel throughout the legal process.", image: "https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=800" },
-  { icon: Shield, title: "Integrity", desc: "Our reputation is built on ethical practice and unwavering commitment to the law.", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=800" },
-  { icon: Users, title: "Client First", desc: "Every strategy and decision is made with our client's best interests at heart.", image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=800" },
+  {
+    icon: Scale,
+    title: "Justice",
+    desc: "Inspired by the Roman tradition of Justitia, we uphold fairness and equity in every case.",
+    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=800"
+  },
+  {
+    icon: Eye,
+    title: "Transparency",
+    desc: "We believe in open communication and honest counsel throughout the legal process.",
+    image: "https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=800"
+  },
+  {
+    icon: Shield,
+    title: "Integrity",
+    desc: "Our reputation is built on ethical practice and unwavering commitment to the law.",
+    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=800"
+  },
+  {
+    icon: Users,
+    title: "Client First",
+    desc: "Every strategy and decision is made with our client's best interests at heart.",
+    image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=800"
+  },
 ];
 
 const About = () => {
   return (
     <>
       <Helmet>
-        <title>About P. J. Jedidiah Koilson | KPJ Advocates | Legal Legacy</title>
-        <meta name="description" content="Learn about P. J. Jedidiah Koilson, Lead Advocate at KPJ Advocates. Over 25 years of legal legacy in Thoothukudi, specializing in compassionate and strategic legal advocacy." />
-        <meta name="keywords" content="P. J. Jedidiah Koilson, Jedidiah Koilson, Jedediah Koilson, Jedidiyah Koilson, Judidiah Koilson, Jedideya Koilson, P J Jedidiah, Law Firm History, Legal Legacy Thoothukudi, K. Pon James, Professional Lawyer Profile" />
+        {/* ── Name-first title for entity-based brand SERP ── */}
+        <title>P. J. Jedidiah Koilson | Best Advocate in Thoothukudi | About KPJ Advocates</title>
+
+        <meta name="description" content="P. J. Jedidiah Koilson — #1 Advocate in Thoothukudi. Professional lawyer with 25+ years legacy. Expert in Civil, Criminal, Property, and Family Law in Tuticorin." />
+
+        {/* ── Local & Branded Keywords ── */}
+        <meta name="keywords" content="Best advocate in Thoothukudi, Best advocate in Tuticorin, Top lawyer in Thoothukudi, Criminal lawyer in Thoothukudi, Advocate near me Thoothukudi, P. J. Jedidiah Koilson, Jedidiah Koilson, Jedediah Koilson, KPJ Advocates, Tuticorin lawyer" />
+
         <link rel="canonical" href="https://kpjadvocates.com/about" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
 
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Person",
-            "@id": "https://kpjadvocates.com/about#person",
-            "name": "P. J. Jedidiah Koilson",
-            "alternateName": ["Jedidiah Koilson", "Jedediah Koilson", "Jedidiyah Koilson", "Judidiah Koilson", "Jedideya Koilson", "P.J. Jedidiah", "Koilson Advocate"],
-            "description": "Lead Advocate at KPJ Advocates, specializing in Civil and Criminal law in Thoothukudi, Tamil Nadu.",
-            "image": "https://kpjadvocates.com/src/assets/jedidah%20koilson.jpeg",
-            "jobTitle": "Lead Advocate",
-            "worksFor": {
-              "@id": "https://kpjadvocates.com/#organization"
-            },
-            "url": "https://kpjadvocates.com/about",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Thoothukudi",
-              "addressRegion": "Tamil Nadu",
-              "addressCountry": "IN"
-            },
-            "knowsAbout": ["Civil Law", "Criminal Law", "Property Law", "Family Law", "Banking Law"],
-            "honorificSuffix": "B.A., LL.B"
-          })}
-        </script>
+        {/* ── Core Person Entity Schema ── */}
+        <script type="application/ld+json">{JSON.stringify(PERSON_SCHEMA)}</script>
 
-        <meta property="og:title" content="Meet P. J. Jedidiah Koilson | Lead Advocate at KPJ Advocates" />
-        <meta property="og:description" content="Discover the story and expertise behind KPJ Advocates. Led by P. J. Jedidiah Koilson, we carry forward a legacy of justice." />
+        {/* ── ProfilePage Schema ── */}
+        <script type="application/ld+json">{JSON.stringify(PROFILE_PAGE_SCHEMA)}</script>
+
+        {/* ── Breadcrumb ── */}
+        <script type="application/ld+json">{JSON.stringify(BREADCRUMB_SCHEMA)}</script>
+
+        {/* ── Open Graph ── */}
+        <meta property="og:type" content="profile" />
+        <meta property="og:title" content="P. J. Jedidiah Koilson | Best Advocate in Thoothukudi | KPJ Advocates" />
+        <meta property="og:description" content="Professional profile of Advocate P. J. Jedidiah Koilson — #1 rated Advocate in Thoothukudi, Tamil Nadu. Specializing in Civil, Criminal and Property Law." />
         <meta property="og:url" content="https://kpjadvocates.com/about" />
+        <meta property="og:image" content="https://kpjadvocates.com/kpj-advocates-thoothukudi-logo.png" />
+        <meta property="og:image:alt" content="Best Advocate in Thoothukudi — P. J. Jedidiah Koilson" />
+        <meta property="og:site_name" content="KPJ Advocates" />
+        <meta property="og:locale" content="en_IN" />
+        <meta property="profile:first_name" content="Jedidiah" />
+        <meta property="profile:last_name" content="Koilson" />
+
+        {/* ── Twitter Card ── */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="P. J. Jedidiah Koilson — Advocate | KPJ Advocates" />
+        <meta name="twitter:description" content="Professional Advocate at KPJ Advocates, Thoothukudi. Expert in Civil, Property, Criminal & Family Law." />
+        <meta name="twitter:image" content="https://kpjadvocates.com/kpj_main_logo.png" />
       </Helmet>
 
-      {/* Header */}
+      {/* ── Header ── */}
       <section className="py-20 lg:py-28 bg-primary">
         <div className="container mx-auto px-4 lg:px-8 text-center">
           <div className="flex items-center gap-2 justify-center mb-4">
@@ -66,16 +192,23 @@ const About = () => {
         </div>
       </section>
 
-      {/* History */}
+      {/* ── History / Person Entity Section ── */}
       <section className="py-20 lg:py-28 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="flex flex-col items-center">
-              <img src={lawyerImg} alt="P. J. JEDIDIAH KOILSON B.A., LL.B, Advocate at KPJ Advocates" className="rounded-2xl shadow-xl w-full max-w-sm mx-auto object-cover aspect-[4/5] mb-4" />
+              <img
+                src={lawyerImg}
+                alt="P. J. Jedidiah Koilson B.A. LL.B — Advocate at KPJ Advocates, Thoothukudi, Tamil Nadu"
+                title="Advocate P. J. Jedidiah Koilson — KPJ Advocates Thoothukudi"
+                className="rounded-2xl shadow-xl w-full max-w-sm mx-auto object-cover aspect-[4/5] mb-4"
+              />
               <div className="text-center">
                 <h4 className="font-heading text-xl font-bold text-foreground">P. J. JEDIDIAH KOILSON B.A., LL.B</h4>
                 <p className="font-body text-base text-accent italic mb-1">Advocate</p>
-                <p className="font-body text-[10px] text-muted-foreground uppercase tracking-widest">Enrolled under THE BAR COUNCIL OF TAMILNADU & PUDUCHERRY</p>
+                <p className="font-body text-[10px] text-muted-foreground uppercase tracking-widest">
+                  Enrolled under THE BAR COUNCIL OF TAMILNADU & PUDUCHERRY
+                </p>
               </div>
             </div>
             <div>
@@ -95,7 +228,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Mission & Values */}
+      {/* ── Mission & Values ── */}
       <section className="py-20 lg:py-28 bg-ivory-dark">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
@@ -113,7 +246,11 @@ const About = () => {
             {values.map((v) => (
               <div key={v.title} className="bg-card rounded-xl overflow-hidden shadow-sm border border-border text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
                 <div className="h-40 overflow-hidden relative">
-                  <img src={v.image} alt={v.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                  <img
+                    src={v.image}
+                    alt={`${v.title} — KPJ Advocates legal value, Thoothukudi`}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
                   <div className="absolute inset-0 bg-black/20" />
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-lg bg-white/90 backdrop-blur-sm flex items-center justify-center text-accent shadow-sm">
                     <v.icon size={24} />
@@ -129,7 +266,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Why Choose Us */}
+      {/* ── Why Choose Us ── */}
       <section className="py-20 lg:py-28 bg-primary text-primary-foreground overflow-hidden">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -161,7 +298,8 @@ const About = () => {
               <div className="absolute -top-10 -right-10 w-64 h-64 bg-gold/10 rounded-full blur-3xl" />
               <img
                 src={chooseUsImg}
-                alt="Professional legal meeting"
+                alt="Professional legal consultation at KPJ Advocates, Thoothukudi — P. J. Jedidiah Koilson"
+                title="Excellence at KPJ Advocates — P. J. Jedidiah Koilson, Advocate Thoothukudi"
                 className="rounded-2xl shadow-2xl relative z-10 w-full object-cover aspect-[4/3]"
               />
             </div>
@@ -169,7 +307,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Founders' Vision */}
+      {/* ── Vision ── */}
       <section className="py-20 lg:py-28 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-4xl mx-auto">
@@ -181,7 +319,6 @@ const About = () => {
               </div>
               <h2 className="text-h2 font-heading text-foreground mb-6">A Future Built on Justice</h2>
             </div>
-
             <div className="flex justify-center">
               <div className="max-w-xl w-full p-6 sm:p-10 rounded-3xl bg-ivory-dark border border-border relative group overflow-hidden text-center">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 rounded-bl-full group-hover:bg-gold/10 transition-colors" />

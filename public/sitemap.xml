@@ -1,27 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+    http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- ══ HOMEPAGE — Priority 1.0 | Entity: P. J. Jedidiah Koilson ══ -->
   <url>
     <loc>https://kpjadvocates.com/</loc>
-    <lastmod>2024-03-01</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://kpjadvocates.com/kpj_main_logo.png</image:loc>
+      <image:title>KPJ Advocates — Law Firm in Thoothukudi | P. J. Jedidiah Koilson</image:title>
+      <image:caption>Official logo of KPJ Advocates, the law firm led by Advocate P. J. Jedidiah Koilson in Thoothukudi, Tamil Nadu.</image:caption>
+    </image:image>
   </url>
+
+  <!-- ══ ABOUT — Dedicated Person Entity Page ══ -->
   <url>
     <loc>https://kpjadvocates.com/about</loc>
-    <lastmod>2024-03-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://kpjadvocates.com/kpj_main_logo.png</image:loc>
+      <image:title>P. J. Jedidiah Koilson — Lead Advocate, KPJ Advocates Thoothukudi</image:title>
+      <image:caption>Advocate P. J. Jedidiah Koilson, Lead Advocate at KPJ Advocates, Thoothukudi, Tamil Nadu.</image:caption>
+    </image:image>
   </url>
+
+  <!-- ══ PRACTICE AREAS — Core Services ══ -->
   <url>
     <loc>https://kpjadvocates.com/practice-areas</loc>
-    <lastmod>2024-03-01</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- ══ SERVICES — Detailed Service Listing ══ -->
+  <url>
+    <loc>https://kpjadvocates.com/services</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- ══ CONTACT — Local SEO Signal ══ -->
   <url>
     <loc>https://kpjadvocates.com/contact</loc>
-    <lastmod>2024-03-01</lastmod>
+    <lastmod>2026-03-09</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
+
 </urlset>
