@@ -275,7 +275,7 @@ const Index = () => {
               <img
                 src={lawyerImg}
                 alt="P. J. Jedidiah Koilson B.A. LL.B — Lead Advocate at KPJ Advocates, Thoothukudi"
-                className="rounded-2xl shadow-xl w-full max-w-md mx-auto object-cover aspect-[4/5] mb-6"
+                className="rounded-2xl shadow-xl w-full max-w-md mx-auto object-cover aspect-[4/5] mb-6 object-top"
               />
               <div className="text-center">
                 <h4 className="font-heading text-2xl font-bold text-foreground">P. J. JEDIDIAH KOILSON B.A., LL.B</h4>

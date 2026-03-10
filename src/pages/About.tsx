@@ -201,7 +201,7 @@ const About = () => {
                 src={lawyerImg}
                 alt="P. J. Jedidiah Koilson B.A. LL.B — Advocate at KPJ Advocates, Thoothukudi, Tamil Nadu"
                 title="Advocate P. J. Jedidiah Koilson — KPJ Advocates Thoothukudi"
-                className="rounded-2xl shadow-xl w-full max-w-sm mx-auto object-cover aspect-[4/5] mb-4"
+                className="rounded-2xl shadow-xl w-full max-w-sm mx-auto object-cover aspect-[4/5] mb-4 object-top"
               />
               <div className="text-center">
                 <h4 className="font-heading text-xl font-bold text-foreground">P. J. JEDIDIAH KOILSON B.A., LL.B</h4>
