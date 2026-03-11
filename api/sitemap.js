@@ -16,7 +16,7 @@ function xmlEscape(input) {
     .replace(/'/g, "&apos;");
 }
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   try {
     const SITE_URL = normalizeBaseUrl(getEnv("SITE_URL") || "https://kpjadvocates.com");
     const now = new Date().toISOString();
@@ -58,10 +58,10 @@ module.exports = async (req, res) => {
       ""
     ].join("\n");
 
-    res.header("content-type", "application/xml; charset=utf-8");
-    res.header("x-content-type-options", "nosniff");
-    res.send(xml);
+    res.setHeader("content-type", "application/xml; charset=utf-8");
+    res.setHeader("x-content-type-options", "nosniff");
+    res.status(200).send(xml);
   } catch (err) {
     res.status(500).send(err.message);
   }
-};
+}

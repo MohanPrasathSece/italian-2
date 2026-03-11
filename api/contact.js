@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
 function getEnv(name) {
   const value = process.env[name];
@@ -22,7 +22,7 @@ function escapeHtml(input) {
     .replace(/'/g, "&#039;");
 }
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   // Add CORS headers for cross-origin or preflight requests
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
   }
 
   if (req.method !== 'POST') {
-    return res.status(405).json({ ok: false, error: "Method not allowed" });
+    return res.status(405).json({ ok: false, error: "Method not allowed. Use POST." });
   }
 
   try {
@@ -53,7 +53,7 @@ module.exports = async (req, res) => {
     const SITE_NAME = getEnv("SITE_NAME") || "Website";
 
     if (!payload || typeof payload !== 'object') {
-      return res.status(400).json({ ok: false, error: "Invalid request body. Ensure Content-Type is application/json." });
+      return res.status(400).json({ ok: false, error: "Invalid request body." });
     }
 
     const name = (payload.name || "").toString().trim();
@@ -83,15 +83,6 @@ module.exports = async (req, res) => {
         rejectUnauthorized: false
       }
     });
-
-    // Test connection
-    try {
-      await transporter.verify();
-      console.log("SMTP connection verified");
-    } catch (verifyErr) {
-      console.error("SMTP Verify Failed:", verifyErr);
-      throw new Error(`SMTP Authorization failed: ${verifyErr.message}. Check your App Password.`);
-    }
 
     const safeName = escapeHtml(name);
     const safeEmail = escapeHtml(email);
@@ -179,14 +170,13 @@ module.exports = async (req, res) => {
       })
     ]);
 
-    res.json({ ok: true });
+    res.status(200).json({ ok: true });
   } catch (err) {
     console.error("SMTP Error:", err);
     res.status(500).json({ 
       ok: false, 
       error: err.message,
-      stack: process.env.NODE_ENV === 'development' ? err.stack : undefined,
       details: "Check Vercel logs for full error"
     });
   }
-};
+}

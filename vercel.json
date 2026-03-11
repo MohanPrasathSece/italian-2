@@ -3,9 +3,9 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
-    { "source": "/api/contact", "destination": "/api/contact.cjs" },
-    { "source": "/robots.txt", "destination": "/api/robots.cjs" },
-    { "source": "/sitemap.xml", "destination": "/api/sitemap.cjs" },
+    { "source": "/api/contact", "destination": "/api/contact.js" },
+    { "source": "/robots.txt", "destination": "/api/robots.js" },
+    { "source": "/sitemap.xml", "destination": "/api/sitemap.js" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

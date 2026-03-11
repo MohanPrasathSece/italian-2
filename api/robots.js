@@ -7,7 +7,7 @@ function normalizeBaseUrl(url) {
   return (url || "").replace(/\/+$/, "");
 }
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   try {
     const SITE_URL = normalizeBaseUrl(getEnv("SITE_URL") || "https://kpjadvocates.com");
     const body = [
@@ -43,9 +43,9 @@ module.exports = async (req, res) => {
       ""
     ].join("\n");
 
-    res.header("content-type", "text/plain; charset=utf-8");
-    res.send(body);
+    res.setHeader("content-type", "text/plain; charset=utf-8");
+    res.status(200).send(body);
   } catch (err) {
     res.status(500).send(err.message);
   }
-};
+}
