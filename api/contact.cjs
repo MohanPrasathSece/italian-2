@@ -8,7 +8,7 @@ function getEnv(name) {
 function requiredEnv(name) {
   const value = getEnv(name);
   if (!value) {
-    throw new Error(`Missing required environment variable: ${name}`);
+    throw new Error(`Environment variable '${name}' is not set in Vercel Settings.`);
   }
   return value;
 }
@@ -152,7 +152,12 @@ module.exports = async (req, res) => {
 
     res.json({ ok: true });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ ok: false, error: err.message });
+    console.error("SMTP Error:", err);
+    res.status(500).json({ 
+      ok: false, 
+      error: err.message,
+      stack: process.env.NODE_ENV === 'development' ? err.stack : undefined,
+      details: "Check Vercel logs for full error"
+    });
   }
 };
