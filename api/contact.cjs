@@ -41,6 +41,8 @@ module.exports = async (req, res) => {
   }
 
   try {
+    const payload = req.body;
+
     const SMTP_HOST = requiredEnv("SMTP_HOST");
     const SMTP_PORT = Number(getEnv("SMTP_PORT") || "587");
     const SMTP_USER = requiredEnv("SMTP_USER");
@@ -50,7 +52,10 @@ module.exports = async (req, res) => {
     const FROM_EMAIL = getEnv("FROM_EMAIL") || SMTP_USER;
     const SITE_NAME = getEnv("SITE_NAME") || "Website";
 
-    const payload = req.body;
+    if (!payload || typeof payload !== 'object') {
+      return res.status(400).json({ ok: false, error: "Invalid request body. Ensure Content-Type is application/json." });
+    }
+
     const name = (payload.name || "").toString().trim();
     const email = (payload.email || "").toString().trim();
     const phone = (payload.phone || "").toString().trim();
@@ -58,12 +63,12 @@ module.exports = async (req, res) => {
     const message = (payload.message || "").toString().trim();
 
     if (!name || !email || !message) {
-      return res.status(400).json({ ok: false, error: "Name, email, and message are required" });
+      return res.status(400).json({ ok: false, error: "Name, email, and message are required." });
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return res.status(400).json({ ok: false, error: "Invalid email address" });
+      return res.status(400).json({ ok: false, error: "Invalid email address." });
     }
 
     const transporter = nodemailer.createTransport({
@@ -78,6 +83,15 @@ module.exports = async (req, res) => {
         rejectUnauthorized: false
       }
     });
+
+    // Test connection
+    try {
+      await transporter.verify();
+      console.log("SMTP connection verified");
+    } catch (verifyErr) {
+      console.error("SMTP Verify Failed:", verifyErr);
+      throw new Error(`SMTP Authorization failed: ${verifyErr.message}. Check your App Password.`);
+    }
 
     const safeName = escapeHtml(name);
     const safeEmail = escapeHtml(email);
@@ -121,14 +135,6 @@ module.exports = async (req, res) => {
       </div>
     `;
 
-    await transporter.sendMail({
-      from: `${SITE_NAME} <${FROM_EMAIL}>`,
-      to: ADMIN_EMAIL,
-      replyTo: email,
-      subject: `New Inquiry: ${subject || "General Inquiry"}`,
-      html: adminHtml,
-    });
-
     const customerHtml = `
       <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #1a1a1a; max-width: 600px; margin: 0 auto; border: 1px solid #e1e1e1; border-radius: 8px; overflow: hidden;">
         <div style="background-color: #0c1a33; color: #ffffff; padding: 20px; text-align: center;">
@@ -156,12 +162,22 @@ module.exports = async (req, res) => {
       </div>
     `;
 
-    await transporter.sendMail({
-      from: `${SITE_NAME} <${FROM_EMAIL}>`,
-      to: email,
-      subject: `We received your message (${SITE_NAME})`,
-      html: customerHtml,
-    });
+    // Send both emails in parallel
+    await Promise.all([
+      transporter.sendMail({
+        from: `"${SITE_NAME}" <${FROM_EMAIL}>`,
+        to: ADMIN_EMAIL,
+        replyTo: email,
+        subject: `New Inquiry: ${subject || "General Inquiry"}`,
+        html: adminHtml,
+      }),
+      transporter.sendMail({
+        from: `"${SITE_NAME}" <${FROM_EMAIL}>`,
+        to: email,
+        subject: `We received your message (${SITE_NAME})`,
+        html: customerHtml,
+      })
+    ]);
 
     res.json({ ok: true });
   } catch (err) {
