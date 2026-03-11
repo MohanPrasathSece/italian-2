@@ -9,7 +9,6 @@ Allow: /
 
 # ── Disallow non-content paths ──
 Disallow: /api/
-Disallow: /.netlify/
 Disallow: /node_modules/
 
 # ── Explicit Googlebot permissions (max crawl signals) ──
@@ -24,7 +23,6 @@ Allow: /*.gif$
 Allow: /*.svg$
 Allow: /*.ico$
 Disallow: /api/
-Disallow: /.netlify/
 
 # ── Image bot access for visual entity reinforcement ──
 User-agent: Googlebot-Image

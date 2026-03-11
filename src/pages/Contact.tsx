@@ -99,7 +99,7 @@ const Contact = () => {
 
         setIsSubmitting(true);
         try {
-            const res = await fetch("/.netlify/functions/contact", {
+            const res = await fetch("/api/contact", {
                 method: "POST",
                 headers: { "content-type": "application/json" },
                 body: JSON.stringify({ name, email, phone, subject, message }),
