@@ -111,6 +111,9 @@ const Contact = () => {
                 throw new Error(data?.error || "Failed to send message");
             }
 
+            // Wait 2 seconds as requested by user
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
             toast({
                 title: "Message sent",
                 description: "We received your message and will contact you shortly.",
