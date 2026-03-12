@@ -39,10 +39,10 @@ const LOCAL_BUSINESS_SCHEMA = {
     },
     "geo": {
         "@type": "GeoCoordinates",
-        "latitude": "8.8105",
-        "longitude": "78.1408"
+        "latitude": "8.8026",
+        "longitude": "78.1368"
     },
-    "hasMap": "https://www.google.com/maps/search/?api=1&query=Pearl+Plaza+Devarpuram+Road+Thoothukudi",
+    "hasMap": "https://www.google.com/maps/search/?api=1&query=KPJ+Advocates+Thoothukudi",
     "openingHoursSpecification": [
         {
             "@type": "OpeningHoursSpecification",
@@ -203,7 +203,7 @@ const Contact = () => {
                                         <h3 className="font-heading text-lg font-semibold text-foreground mb-2">Our Address</h3>
                                         <p className="font-body text-muted-foreground leading-relaxed text-sm">
                                             <a
-                                                href="https://www.google.com/maps/search/?api=1&query=Pearl+Plaza+Devarpuram+Road+Thoothukudi"
+                                                href="https://www.google.com/maps/search/?api=1&query=KPJ+Advocates+Thoothukudi"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="hover:text-accent transition-colors"
@@ -353,15 +353,15 @@ const Contact = () => {
             {/* ── Map Section ── */}
             <section className="h-[450px] w-full bg-ivory-dark relative overflow-hidden">
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1416.7126!2d78.1408!3d8.8105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b03f0ec3531b7e1%3A0xc3924f0a0d440c9d!2sPearl%20Plaza%2C%20Thoothukudi%2C%20Tamil%20Nadu%20628001!5e0!3m2!1sen!2sin!4v1709300000000!5m2!1sen!2sin"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.8240126682763!2d78.13680227766052!3d8.802598669955032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d2f7c10b7fb4d3%3A0xb2f4d66510c92172!2sKPJ%20Advocates!5e0!3m2!1sen!2sin!4v1773334170853!5m2!1sen!2sin"
                     width="100%"
                     height="100%"
-                    style={{ border: 0 }}
+                    style={{ border:0 }}
                     allowFullScreen={true}
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="KPJ Advocates Office Location — Pearl Plaza, Thoothukudi"
-                    aria-label="Google Maps showing KPJ Advocates office at Pearl Plaza, Devarpuram Road, Thoothukudi"
+                    title="KPJ Advocates Office Location — Thoothukudi"
+                    aria-label="Google Maps showing KPJ Advocates office in Thoothukudi"
                     className="grayscale hover:grayscale-0 transition-all duration-700"
                 />
             </section>
