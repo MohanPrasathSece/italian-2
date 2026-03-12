@@ -176,6 +176,7 @@ const Index = () => {
         {/* ── Local & Branded Keywords ── */}
         <meta name="keywords" content="Best advocate in Thoothukudi, Best advocate in Tuticorin, Top lawyer in Thoothukudi, Criminal lawyer in Thoothukudi, Advocate near me Thoothukudi, Best legal services in Thoothukudi, Tuticorin advocate office, Advocate in Thoothukudi court, P. J. Jedidiah Koilson, Jedidiah Koilson, Jedediah Koilson, Jedidiyah Koilson, KPJ Advocates, Tuticorin lawyer" />
 
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <link rel="canonical" href="https://kpjadvocates.com/" />
 
         {/* ── Entity Schema: Person (primary) ── */}

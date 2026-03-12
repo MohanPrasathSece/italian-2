@@ -9,7 +9,7 @@
   <!-- ══ HOMEPAGE — Priority 1.0 | Entity: P. J. Jedidiah Koilson ══ -->
   <url>
     <loc>https://kpjadvocates.com/</loc>
-    <lastmod>2026-03-09</lastmod>
+    <lastmod>2026-03-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -22,7 +22,7 @@
   <!-- ══ ABOUT — Dedicated Person Entity Page ══ -->
   <url>
     <loc>https://kpjadvocates.com/about</loc>
-    <lastmod>2026-03-09</lastmod>
+    <lastmod>2026-03-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <image:image>
@@ -35,7 +35,7 @@
   <!-- ══ PRACTICE AREAS — Core Services ══ -->
   <url>
     <loc>https://kpjadvocates.com/practice-areas</loc>
-    <lastmod>2026-03-09</lastmod>
+    <lastmod>2026-03-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -43,7 +43,7 @@
   <!-- ══ SERVICES — Detailed Service Listing ══ -->
   <url>
     <loc>https://kpjadvocates.com/services</loc>
-    <lastmod>2026-03-09</lastmod>
+    <lastmod>2026-03-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -51,7 +51,7 @@
   <!-- ══ CONTACT — Local SEO Signal ══ -->
   <url>
     <loc>https://kpjadvocates.com/contact</loc>
-    <lastmod>2026-03-09</lastmod>
+    <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
