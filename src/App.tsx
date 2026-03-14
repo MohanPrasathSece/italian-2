@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Layout from "./components/Layout";
+import DisclaimerModal from "./components/DisclaimerModal";
 import Index from "./pages/Index";
 import PracticeAreas from "./pages/PracticeAreas";
 import About from "./pages/About";
@@ -20,6 +21,7 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        <DisclaimerModal />
         <BrowserRouter>
           <Layout>
             <Routes>
