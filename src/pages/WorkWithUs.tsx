@@ -58,16 +58,12 @@ const WorkWithUs = () => {
               <Briefcase size={28} />
             </div>
 
-            <h3 className="font-heading text-2xl font-bold text-foreground mb-4">Application Details</h3>
-            
-            <div className="my-6 p-6 bg-ivory-dark rounded-xl border border-gold/20">
-              <p className="font-body text-base text-foreground leading-relaxed">
-                If you wish to work with us, please share your CV to{" "}
-                <a href="mailto:info@kpjadvocates.com" className="text-accent font-semibold hover:underline">
-                  info@kpjadvocates.com
-                </a>
-              </p>
-            </div>
+            <p className="font-body text-base text-foreground leading-relaxed my-6">
+              If you wish to work with us, please share your CV to{" "}
+              <a href="mailto:info@kpjadvocates.com" className="text-accent font-semibold hover:underline">
+                info@kpjadvocates.com
+              </a>
+            </p>
 
             <div className="space-y-4 mt-8">
               <a
