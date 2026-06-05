@@ -8,6 +8,7 @@ const navLinks = [
   { label: "About", path: "/about" },
   { label: "Services", path: "/services" },
   { label: "Practice Areas", path: "/practice-areas" },
+  { label: "Work with us", path: "/work-with-us" },
   { label: "Contact", path: "/contact" },
 ];
 
@@ -35,13 +36,13 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop */}
-        <ul className="hidden md:flex items-center gap-8">
+        <ul className="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-8">
           {navLinks.map((link) => (
             <li key={link.path}>
               <Link
                 to={link.path}
                 onClick={() => window.scrollTo(0, 0)}
-                className={`font-body text-sm font-medium tracking-wide uppercase transition-colors hover:text-gold ${location.pathname === link.path
+                className={`font-body text-xs lg:text-sm font-medium tracking-wide uppercase transition-colors hover:text-gold ${location.pathname === link.path
                   ? "text-gold"
                   : scrolled || !isHome ? "text-foreground" : "text-white"
                   }`}
@@ -55,7 +56,7 @@ const Navbar = () => {
         <Link
           to="/services"
           onClick={() => window.scrollTo(0, 0)}
-          className="hidden md:inline-flex items-center px-6 py-2.5 rounded-md bg-accent text-accent-foreground font-body text-sm font-semibold tracking-wide hover:opacity-90 transition-opacity"
+          className="hidden md:inline-flex items-center px-4 lg:px-6 py-2 md:py-2.5 rounded-md bg-accent text-accent-foreground font-body text-xs lg:text-sm font-semibold tracking-wide hover:opacity-90 transition-opacity"
         >
           Request a Consultation
         </Link>
