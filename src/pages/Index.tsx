@@ -445,16 +445,7 @@ const Index = () => {
       </div>
 
       {/* Hero — FULL SCREEN */}
-      <section className="relative min-h-[calc(100vh-5rem)] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="w-full h-full bg-gradient-to-br from-navy via-primary to-navy-light" />
-          <div className="absolute inset-0 opacity-20" style={{
-            backgroundImage: `radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.35) 0%, transparent 55%), radial-gradient(circle at 70% 70%, rgba(212, 175, 55, 0.25) 0%, transparent 55%)`
-          }} />
-        </div>
-
-        <FloatingCoins />
-
+      <section className="relative min-h-[calc(100vh-5rem)] flex items-center overflow-hidden bg-primary">
         <div className="relative container mx-auto px-4 lg:px-8 py-16 sm:py-20 text-center z-10">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
