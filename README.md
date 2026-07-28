@@ -1,6 +1,6 @@
-# CryptoVest Capital
+# Aethel Capital
 
-A modern cryptocurrency investment firm website for CryptoVest Capital. Built with Vite + React + TypeScript, shadcn/ui, Tailwind CSS, and Vercel Blob storage-backed auth with CRM lead capture.
+A modern cryptocurrency investment firm website for Aethel Capital. Built with Vite + React + TypeScript, shadcn/ui, Tailwind CSS, and Vercel Blob storage-backed auth with CRM lead capture.
 
 ## Technologies Used
 
@@ -49,4 +49,3 @@ For Vercel deployments:
 - API routes live in `api/*.cjs` (signup/login/contact)
 - Frontend builds to `dist/`
 - Set environment variables in Vercel project dashboard
-# italian-2

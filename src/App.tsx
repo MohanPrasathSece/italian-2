@@ -128,11 +128,11 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
 
 const App = () => (
   <HelmetProvider>
-    <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
           <Layout>
             <Routes>
               <Route path="/" element={<Index />} />
@@ -142,9 +142,9 @@ const App = () => (
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </Layout>
-        </BrowserRouter>
-      </TooltipProvider>
-    </AuthProvider>
+        </TooltipProvider>
+      </AuthProvider>
+    </BrowserRouter>
   </HelmetProvider>
 );
 

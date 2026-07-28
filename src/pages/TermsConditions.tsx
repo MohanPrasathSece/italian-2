@@ -16,7 +16,7 @@ const SECTIONS = [
     icon: ShieldCheck,
     title: "1. Acceptance of Terms",
     body:
-      "By accessing, browsing, or using the CryptoVest Capital website (the \"Site\"), any features, content, forms, or services made available by CryptoVest Capital (\"we,\" \"us,\" \"our,\" or \"the Company\"), you acknowledge that you have read, understood, and agree to be legally bound by these Terms & Conditions (\"Terms\"). If you do not agree with any part of these Terms, you must discontinue use of the Site immediately. Continued use following any posted update to these Terms constitutes your acceptance of the revised Terms.",
+      "By accessing, browsing, or using the Aethel Capital website (the \"Site\"), any features, content, forms, or services made available by Aethel Capital (\"we,\" \"us,\" \"our,\" or \"the Company\"), you acknowledge that you have read, understood, and agree to be legally bound by these Terms & Conditions (\"Terms\"). If you do not agree with any part of these Terms, you must discontinue use of the Site immediately. Continued use following any posted update to these Terms constitutes your acceptance of the revised Terms.",
   },
   {
     id: "eligibility",
@@ -30,7 +30,7 @@ const SECTIONS = [
     icon: Globe,
     title: "3. Website Purpose & Nature",
     body:
-      "CryptoVest Capital is an educational, informational, and client-facing digital asset investment platform. The Site provides general information about digital assets, blockchain technology, portfolio management, and investor education materials. Any descriptions of strategies, historical performance, allocations, or market views are for illustrative, educational, and marketing purposes only. They do not represent the performance of any specific investor, guarantee any future outcome, or constitute a binding offer.",
+      "Aethel Capital is an educational, informational, and client-facing digital asset investment platform. The Site provides general information about digital assets, blockchain technology, portfolio management, and investor education materials. Any descriptions of strategies, historical performance, allocations, or market views are for illustrative, educational, and marketing purposes only. They do not represent the performance of any specific investor, guarantee any future outcome, or constitute a binding offer.",
   },
   {
     id: "responsibilities",
@@ -51,7 +51,7 @@ const SECTIONS = [
     icon: Award,
     title: "6. Intellectual Property Rights",
     body:
-      "All content on the Site — including but not limited to text, graphics, logos, icons, images, audio, video, software, animations, UI components, data compilations, custom illustrations, selection and arrangement of materials, and our trade names, trademarks, and service marks (including CryptoVest Capital and related indicia) — are the exclusive property of CryptoVest Capital or its licensors and are protected by copyright, trademark, patent, and other intellectual property laws worldwide. You are granted a limited, non-exclusive, non-transferable, revocable license to access and use the Site for your personal, non-commercial, informational purposes. No right, title, or interest is transferred to you.",
+      "All content on the Site — including but not limited to text, graphics, logos, icons, images, audio, video, software, animations, UI components, data compilations, custom illustrations, selection and arrangement of materials, and our trade names, trademarks, and service marks (including Aethel Capital and related indicia) — are the exclusive property of Aethel Capital or its licensors and are protected by copyright, trademark, patent, and other intellectual property laws worldwide. You are granted a limited, non-exclusive, non-transferable, revocable license to access and use the Site for your personal, non-commercial, informational purposes. No right, title, or interest is transferred to you.",
   },
   {
     id: "crypto-risk",
@@ -107,14 +107,14 @@ const SECTIONS = [
     icon: Gavel,
     title: "14. Dispute Resolution",
     body:
-      "Prior to initiating any formal proceedings, you agree to first attempt to resolve any dispute informally by sending a written notice to our legal team at legal@cryptovestcapital.com with a clear description of the dispute, the relevant facts, and the relief you seek. We will then attempt in good faith to resolve the dispute through direct consultation within a period of thirty (30) calendar days from receipt of the notice. If the dispute is not resolved within that period, either party may then initiate formal proceedings in accordance with Section 13 (Governing Law & Venue).",
+      "Prior to initiating any formal proceedings, you agree to first attempt to resolve any dispute informally by sending a written notice to our legal team at legal@aethelcapital.com with a clear description of the dispute, the relevant facts, and the relief you seek. We will then attempt in good faith to resolve the dispute through direct consultation within a period of thirty (30) calendar days from receipt of the notice. If the dispute is not resolved within that period, either party may then initiate formal proceedings in accordance with Section 13 (Governing Law & Venue).",
   },
   {
     id: "contact",
     icon: MessageSquare,
     title: "15. Contact",
     body:
-      "Questions, notices, or requests regarding these Terms should be directed to: CryptoVest Capital · Email: legal@cryptovestcapital.com · Support: invest@cryptovestcapital.com · Address: 100 Blockchain Avenue, Suite 500, Singapore 018956. Communications received through the above channels shall be deemed received upon confirmation from our systems.",
+      "Questions, notices, or requests regarding these Terms should be directed to: Aethel Capital · Email: legal@aethelcapital.com · Support: invest@aethelcapital.com · Address: 100 Blockchain Avenue, Suite 500, Singapore 018956. Communications received through the above channels shall be deemed received upon confirmation from our systems.",
   },
 ];
 
@@ -122,10 +122,10 @@ const TermsConditions = () => {
   return (
     <>
       <Helmet>
-        <title>Terms & Conditions | CryptoVest Capital</title>
-        <meta name="description" content="CryptoVest Capital terms & conditions. Important disclaimers including cryptocurrency risk disclosure, no financial advice, no guaranteed returns, and limitation of liability." />
+        <title>Terms & Conditions | Aethel Capital</title>
+        <meta name="description" content="Aethel Capital terms & conditions. Important disclaimers including cryptocurrency risk disclosure, no financial advice, no guaranteed returns, and limitation of liability." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://cryptovestcapital.com/terms" />
+        <link rel="canonical" href="https://aethelcapital.com/terms" />
       </Helmet>
 
       <div className="pt-28 sm:pt-32 pb-16 min-h-screen bg-background">
@@ -143,7 +143,7 @@ const TermsConditions = () => {
               </div>
               <h1 className="text-h1 font-heading text-foreground mb-4 leading-tight">Terms &amp; Conditions</h1>
               <p className="font-body text-base text-muted-foreground max-w-3xl leading-relaxed">
-                Please read these terms carefully before using the CryptoVest Capital website. They include important disclaimers, risk warnings, and limitations of liability. By accessing or using the Site, you agree to be bound by these Terms &amp; Conditions in full.
+                Please read these terms carefully before using the Aethel Capital website. They include important disclaimers, risk warnings, and limitations of liability. By accessing or using the Site, you agree to be bound by these Terms &amp; Conditions in full.
               </p>
 
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl">

@@ -130,9 +130,9 @@ const SECTIONS = [
     title: "11. Contact & Complaints",
     items: [
       "Questions, requests, or complaints regarding this Privacy Policy or the handling of your information should be directed to our Data Protection / Privacy team:",
-      "• <strong>Email:</strong> privacy@cryptovestcapital.com",
-      "• <strong>Support email:</strong> invest@cryptovestcapital.com",
-      "• <strong>Mail:</strong> CryptoVest Capital, 100 Blockchain Avenue, Suite 500, Singapore 018956",
+      "• <strong>Email:</strong> privacy@aethelcapital.com",
+      "• <strong>Support email:</strong> invest@aethelcapital.com",
+      "• <strong>Mail:</strong> Aethel Capital, 100 Blockchain Avenue, Suite 500, Singapore 018956",
       "If you remain dissatisfied after our internal review, you may be entitled to lodge a complaint with your local data protection authority.",
     ],
   },
@@ -149,10 +149,10 @@ const PrivacyPolicy = () => {
   return (
     <>
       <Helmet>
-        <title>Privacy Policy | CryptoVest Capital</title>
-        <meta name="description" content="CryptoVest Capital privacy policy. How we collect, use, and protect your personal data including CRM processing, cookies, security, and your rights." />
+        <title>Privacy Policy | Aethel Capital</title>
+        <meta name="description" content="Aethel Capital privacy policy. How we collect, use, and protect your personal data including CRM processing, cookies, security, and your rights." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://cryptovestcapital.com/privacy" />
+        <link rel="canonical" href="https://aethelcapital.com/privacy" />
       </Helmet>
 
       <div className="pt-28 sm:pt-32 pb-16 min-h-screen bg-background">
@@ -170,7 +170,7 @@ const PrivacyPolicy = () => {
               </div>
               <h1 className="text-h1 font-heading text-foreground mb-4 leading-tight">Privacy Policy</h1>
               <p className="font-body text-base text-muted-foreground max-w-3xl leading-relaxed">
-                CryptoVest Capital is committed to protecting your privacy. This policy explains what information we collect, how we use it, the basis on which we process it, and the rights and controls you have over your data when using our website and services.
+                Aethel Capital is committed to protecting your privacy. This policy explains what information we collect, how we use it, the basis on which we process it, and the rights and controls you have over your data when using our website and services.
               </p>
               <p className="font-body text-xs text-muted-foreground mt-6">
                 <strong className="text-foreground">Last updated:</strong> July 2025 · Effective as of the date posted above.
@@ -216,7 +216,7 @@ const PrivacyPolicy = () => {
           <motion.div {...fadeUp} className="rounded-2xl border border-accent/20 bg-accent/5 p-6 sm:p-8">
             <h3 className="font-heading text-lg font-bold text-foreground mb-2">Acknowledgement</h3>
             <p className="font-body text-sm text-muted-foreground leading-relaxed">
-              By using the CryptoVest Capital website, submitting any form, or creating an account, you acknowledge that you have read, understood, and agreed to the practices described in this Privacy Policy and our accompanying Terms &amp; Conditions. We may update this policy from time to time; material changes will be reflected by updating the "Last updated" date above and, where appropriate, notified via email or prominent website notice.
+              By using the Aethel Capital website, submitting any form, or creating an account, you acknowledge that you have read, understood, and agreed to the practices described in this Privacy Policy and our accompanying Terms &amp; Conditions. We may update this policy from time to time; material changes will be reflected by updating the "Last updated" date above and, where appropriate, notified via email or prominent website notice.
             </p>
           </motion.div>
         </div>
