@@ -1,6 +1,6 @@
 # ════════════════════════════════════════════════════════════
-# KPJ Advocates — Elite Crawl & Indexing Control
-# Entity: P. J. Jedidiah Koilson | kpjadvocates.com
+# CryptoVest Capital — Crawl & Indexing Control
+# Entity: CryptoVest Capital Pte. Ltd. | cryptovestcapital.com
 # ════════════════════════════════════════════════════════════
 
 # ── Allow all major search engine bots ──
@@ -11,7 +11,7 @@ Allow: /
 Disallow: /api/
 Disallow: /node_modules/
 
-# ── Explicit Googlebot permissions (max crawl signals) ──
+# ── Explicit Googlebot permissions ──
 User-agent: Googlebot
 Allow: /
 Allow: /*.js$
@@ -24,7 +24,7 @@ Allow: /*.svg$
 Allow: /*.ico$
 Disallow: /api/
 
-# ── Image bot access for visual entity reinforcement ──
+# ── Image bot access ──
 User-agent: Googlebot-Image
 Allow: /
 
@@ -37,7 +37,7 @@ User-agent: Bingbot
 Allow: /
 
 # ── Sitemap declaration ──
-Sitemap: https://kpjadvocates.com/sitemap.xml
+Sitemap: https://cryptovestcapital.com/sitemap.xml
 
-# ── Crawl delay (optional — remove if Netlify functions have no rate limit) ──
+# ── Crawl delay ──
 Crawl-delay: 0

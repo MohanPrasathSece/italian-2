@@ -1,218 +1,55 @@
 const express = require('express');
-const nodemailer = require('nodemailer');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 
 function getEnv(name) {
-  const value = process.env[name];
-  return typeof value === "string" && value.trim() !== "" ? value.trim() : undefined;
+  const v = process.env[name];
+  return typeof v === 'string' && v.trim() !== '' ? v.trim() : undefined;
 }
 
-function normalizeBaseUrl(url) {
-  return (url || "").replace(/\/+$/, "");
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = process.env.NODE_TLS_REJECT_UNAUTHORIZED || '0';
+
+// Load API route handlers
+const contactHandler = require('./api/contact.cjs');
+const signupHandler = require('./api/signup.cjs');
+const loginHandler = require('./api/login.cjs');
+
+// Wrap handlers for Express
+function toExpress(handler) {
+  return (req, res) => {
+    return handler(req, res);
+  };
 }
 
-function xmlEscape(input) {
-  return String(input)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
-}
+// API routes
+app.post('/api/contact', toExpress(contactHandler));
+app.post('/api/signup', toExpress(signupHandler));
+app.post('/api/login', toExpress(loginHandler));
 
-function requiredEnv(name) {
-  const value = getEnv(name);
-  if (!value) {
-    throw new Error(`Missing required environment variable: ${name}`);
-  }
-  return value;
-}
+app.options('/api/contact', (req, res) => { res.setHeader('Access-Control-Allow-Origin', '*'); res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS'); res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); res.status(200).end(); });
+app.options('/api/signup', (req, res) => { res.setHeader('Access-Control-Allow-Origin', '*'); res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS'); res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); res.status(200).end(); });
+app.options('/api/login', (req, res) => { res.setHeader('Access-Control-Allow-Origin', '*'); res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS'); res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); res.status(200).end(); });
 
-function escapeHtml(input) {
-  return String(input)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-app.post('/api/contact', async (req, res) => {
-  try {
-    const SMTP_HOST = requiredEnv("SMTP_HOST");
-    const SMTP_PORT = Number(getEnv("SMTP_PORT") || "587");
-    const SMTP_USER = requiredEnv("SMTP_USER");
-    const SMTP_PASS = requiredEnv("SMTP_PASS");
-
-    const ADMIN_EMAIL = requiredEnv("ADMIN_EMAIL");
-    const FROM_EMAIL = getEnv("FROM_EMAIL") || SMTP_USER;
-    const SITE_NAME = getEnv("SITE_NAME") || "Website";
-
-    const payload = req.body;
-    const name = (payload.name || "").toString().trim();
-    const email = (payload.email || "").toString().trim();
-    const phone = (payload.phone || "").toString().trim();
-    const subject = (payload.subject || "").toString().trim();
-    const message = (payload.message || "").toString().trim();
-
-    if (!name || !email || !message) {
-      return res.status(400).json({ ok: false, error: "Name, email, and message are required" });
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return res.status(400).json({ ok: false, error: "Invalid email address" });
-    }
-
-    const transporter = nodemailer.createTransport({
-      host: SMTP_HOST,
-      port: SMTP_PORT,
-      secure: SMTP_PORT === 465,
-      auth: {
-        user: SMTP_USER,
-        pass: SMTP_PASS,
-      },
-      tls: {
-        rejectUnauthorized: false
-      }
-    });
-
-    const safeName = escapeHtml(name);
-    const safeEmail = escapeHtml(email);
-    const safePhone = escapeHtml(phone || "Not provided");
-    const safeSubject = escapeHtml(subject || "General Inquiry");
-    const safeMessage = escapeHtml(message).replace(/\n/g, "<br/>");
-
-    const adminHtml = `
-      <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #1a1a1a; max-width: 600px; margin: 0 auto; border: 1px solid #e1e1e1; border-radius: 8px; overflow: hidden;">
-        <div style="background-color: #0c1a33; color: #ffffff; padding: 20px; text-align: center;">
-          <h1 style="margin: 0; font-size: 24px;">New Legal Inquiry</h1>
-        </div>
-        <div style="padding: 30px;">
-          <p style="font-size: 16px; margin-bottom: 20px;">You have received a new consultation request from your website.</p>
-          <table style="width: 100%; border-collapse: collapse;">
-            <tr>
-              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0; width: 120px;"><strong>Client Name:</strong></td>
-              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;">${safeName}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;"><strong>Email:</strong></td>
-              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;"><a href="mailto:${safeEmail}" style="color: #c9a050; text-decoration: none;">${safeEmail}</a></td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;"><strong>Phone:</strong></td>
-              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;"><a href="tel:${safePhone}" style="color: #c9a050; text-decoration: none;">${safePhone}</a></td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;"><strong>Topic:</strong></td>
-              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;">${safeSubject}</td>
-            </tr>
-          </table>
-          <div style="margin-top: 25px; background: #f9f9f9; padding: 20px; border-radius: 6px; border-left: 4px solid #c9a050;">
-            <p style="margin: 0; font-weight: bold; color: #0c1a33; margin-bottom: 10px;">Message Detail:</p>
-            <p style="margin: 0; font-style: italic;">"${safeMessage}"</p>
-          </div>
-        </div>
-        <div style="background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 12px; color: #777;">
-          <p style="margin: 0;">This inquiry was sent via the contact form on kpjadvocates.com</p>
-        </div>
-      </div>
-    `;
-
-    await transporter.sendMail({
-      from: `${SITE_NAME} <${FROM_EMAIL}>`,
-      to: ADMIN_EMAIL,
-      replyTo: email,
-      subject: `New Inquiry: ${subject || "General Inquiry"}`,
-      html: adminHtml,
-    });
-
-    const customerHtml = `
-      <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #1a1a1a; max-width: 600px; margin: 0 auto; border: 1px solid #e1e1e1; border-radius: 8px; overflow: hidden;">
-        <div style="background-color: #0c1a33; color: #ffffff; padding: 20px; text-align: center;">
-          <h1 style="margin: 0; font-size: 24px;">Message Received</h1>
-        </div>
-        <div style="padding: 30px;">
-          <p style="font-size: 16px; margin-bottom: 20px;">Dear ${safeName},</p>
-          <p>Thank you for reaching out to <strong>${escapeHtml(SITE_NAME)}</strong>. We have successfully received your inquiry and one of our legal experts will review it and get back to you shortly.</p>
-          
-          <div style="margin-top: 25px; padding: 20px; border: 1px solid #f0f0f0; border-radius: 6px; border-top: 3px solid #c9a050;">
-            <p style="margin: 0; font-weight: bold; color: #0c1a33; margin-bottom: 15px;">Summary of your request:</p>
-            <p style="margin: 0 0 5px; font-size: 14px;"><strong>Topic:</strong> ${safeSubject}</p>
-            <p style="margin: 0; font-size: 14px; font-style: italic;">"${safeMessage}"</p>
-          </div>
-          
-          <div style="margin-top: 30px; text-align: center;">
-            <a href="https://kpjadvocates.com" style="display: inline-block; padding: 12px 24px; background-color: #c9a050; color: #ffffff; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 14px;">Visit Our Website</a>
-          </div>
-        </div>
-        <div style="background-color: #f4f4f4; padding: 20px; text-align: center; font-size: 13px; color: #555; border-top: 1px solid #eee;">
-          <p style="margin: 0;"><strong>${escapeHtml(SITE_NAME)}</strong></p>
-          <p style="margin: 5px 0 0;">Dedicated to Justice, Integrity, and Excellence.</p>
-          <p style="margin: 10px 0 0; font-size: 11px;">If you did not submit this request, please ignore this email.</p>
-        </div>
-      </div>
-    `;
-
-    await transporter.sendMail({
-      from: `${SITE_NAME} <${FROM_EMAIL}>`,
-      to: email,
-      subject: `We received your message (${SITE_NAME})`,
-      html: customerHtml,
-    });
-
-    res.json({ ok: true });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ ok: false, error: err.message });
-  }
-});
-
-// ── Sitemap & Robots Routes ────────────────────────────────────
-
+// ── Sitemap & Robots ──
 app.get('/robots.txt', (req, res) => {
   try {
-    const SITE_URL = normalizeBaseUrl(getEnv("SITE_URL") || "https://kpjadvocates.com");
+    const SITE_URL = (getEnv('SITE_URL') || 'https://cryptovestcapital.com').replace(/\/+$/, '');
     const body = [
-      "# ════════════════════════════════════════════════════════════",
-      "# KPJ Advocates — Elite Crawl & Indexing Control",
-      "# Entity: P. J. Jedidiah Koilson | kpjadvocates.com",
-      "# ════════════════════════════════════════════════════════════",
-      "",
+      "# CryptoVest Capital — Crawler Control",
       "User-agent: *",
       "Allow: /",
       "Disallow: /api/",
       "",
-      "User-agent: Googlebot",
-      "Allow: /",
-      "Allow: /*.js$",
-      "Allow: /*.css$",
-      "Allow: /*.png$",
-      "Allow: /*.jpg$",
-      "Allow: /*.jpeg$",
-      "Allow: /*.svg$",
-      "Disallow: /api/",
-      "",
-      "User-agent: Googlebot-Image",
-      "Allow: /",
-      "",
-      "User-agent: Googlebot-Mobile",
-      "Allow: /",
-      "",
-      "User-agent: Bingbot",
-      "Allow: /",
-      "",
       `Sitemap: ${SITE_URL}/sitemap.xml`,
       ""
     ].join("\n");
-
     res.header("content-type", "text/plain; charset=utf-8");
     res.send(body);
   } catch (err) {
@@ -222,42 +59,32 @@ app.get('/robots.txt', (req, res) => {
 
 app.get('/sitemap.xml', (req, res) => {
   try {
-    const SITE_URL = normalizeBaseUrl(getEnv("SITE_URL") || "https://kpjadvocates.com");
+    const SITE_URL = (getEnv('SITE_URL') || 'https://cryptovestcapital.com').replace(/\/+$/, '');
     const now = new Date().toISOString();
+    const esc = (s) => String(s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+
     const routes = [
-      { path: "/", changefreq: "weekly", priority: "1.0", imageUrl: `${SITE_URL}/kpj-advocates-thoothukudi-logo.png`, imageTitle: "Best Advocate in Thoothukudi | KPJ Advocates | P. J. Jedidiah Koilson", imageCaption: "Official logo of KPJ Advocates — #1 Rated Law Firm in Thoothukudi, led by Advocate P. J. Jedidiah Koilson." },
-      { path: "/about", changefreq: "weekly", priority: "0.95", imageUrl: `${SITE_URL}/best-advocate-in-thoothukudi-jedidiah-koilson.jpeg`, imageTitle: "P. J. Jedidiah Koilson — Best Advocate in Thoothukudi", imageCaption: "Ranked #1 Advocate in Thoothukudi, P. J. Jedidiah Koilson B.A. LL.B — Lead Advocate at KPJ Advocates." },
-      { path: "/practice-areas", changefreq: "weekly", priority: "0.90", imageUrl: `${SITE_URL}/family-lawyer-thoothukudi.png`, imageTitle: "Top Legal Services in Thoothukudi | Practice Areas", imageCaption: "Comprehensive legal practice areas including Civil, Property, and Family Law in Thoothukudi." },
-      { path: "/services", changefreq: "weekly", priority: "0.85" },
-      { path: "/contact", changefreq: "monthly", priority: "0.85" }
+      { path: "/", changefreq: "weekly", priority: "1.0" },
+      { path: "/learn", changefreq: "weekly", priority: "0.90" },
+      { path: "/privacy", changefreq: "monthly", priority: "0.40" },
+      { path: "/terms", changefreq: "monthly", priority: "0.40" },
     ];
 
-    const urlset = routes.map((route) => {
-      const loc = xmlEscape(`${SITE_URL}${route.path}`);
-      const imageBlock = route.imageUrl ? [
-        "    <image:image>",
-        `      <image:loc>${xmlEscape(route.imageUrl)}</image:loc>`,
-        `      <image:title>${xmlEscape(route.imageTitle)}</image:title>`,
-        `      <image:caption>${xmlEscape(route.imageCaption)}</image:caption>`,
-        "    </image:image>"
-      ].join("\n") : "";
-      return [
-        "  <url>",
-        `    <loc>${loc}</loc>`,
-        `    <lastmod>${xmlEscape(now)}</lastmod>`,
-        `    <changefreq>${route.changefreq}</changefreq>`,
-        `    <priority>${route.priority}</priority>`,
-        imageBlock,
-        "  </url>"
-      ].filter(Boolean).join("\n");
-    }).join("\n");
+    const urls = routes.map(r => [
+      "  <url>",
+      `    <loc>${esc(SITE_URL + r.path)}</loc>`,
+      `    <lastmod>${esc(now)}</lastmod>`,
+      `    <changefreq>${r.changefreq}</changefreq>`,
+      `    <priority>${r.priority}</priority>`,
+      "  </url>"
+    ].join("\n")).join("\n");
 
     const xml = [
       '<?xml version="1.0" encoding="UTF-8"?>',
-      '<urlset',
-      '  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
-      '  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">',
-      urlset,
+      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+      urls,
       "</urlset>",
       ""
     ].join("\n");
@@ -270,7 +97,19 @@ app.get('/sitemap.xml', (req, res) => {
   }
 });
 
+// Health check
+app.get('/api/health', (req, res) => {
+  res.json({
+    ok: true,
+    time: new Date().toISOString(),
+    crmConfigured: !!getEnv('CRM_TOKEN'),
+    blobConfigured: !!getEnv('BLOB_READ_WRITE_TOKEN'),
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`[server.cjs] CryptoVest Capital backend running on port ${PORT}`);
+  console.log(`[server.cjs] CRM configured: ${!!getEnv('CRM_TOKEN') || !!getEnv('CRM_ENDPOINT')}`);
+  console.log(`[server.cjs] Blob configured: ${!!getEnv('BLOB_READ_WRITE_TOKEN')}`);
 });
