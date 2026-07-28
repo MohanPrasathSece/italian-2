@@ -55,7 +55,9 @@ async function getUser(email) {
   }
   try {
     const path = userPath(email);
-    const result = await get(path, token ? { token } : undefined);
+    const getOpts = { access: ACCESS_MODE };
+    if (token) getOpts.token = token;
+    const result = await get(path, getOpts);
     if (!result?.url) return null;
     const res = await fetch(result.url, { method: "GET", redirect: "follow" });
     if (!res.ok) {
@@ -146,7 +148,9 @@ async function getSession(token) {
   if (!isBlobConfigured()) return null;
   try {
     const path = sessionPath(token);
-    const result = await get(path, blobToken ? { token: blobToken } : undefined);
+    const getOpts = { access: ACCESS_MODE };
+    if (blobToken) getOpts.token = blobToken;
+    const result = await get(path, getOpts);
     if (!result?.url) return null;
     const res = await fetch(result.url, { method: "GET", redirect: "follow" });
     if (!res.ok) return null;

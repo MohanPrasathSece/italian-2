@@ -172,10 +172,10 @@ export default function LoginModal({ open, onClose, onSwitchToSignup }: LoginMod
               {loading ? (
                 <>
                   <Loader2 size={16} className="mr-2 animate-spin" />
-                  Logging you in...
+                  Logging into Crypto Account...
                 </>
               ) : (
-                "Log In"
+                "Log In to Crypto Portfolio"
               )}
             </Button>
 

@@ -240,11 +240,11 @@ export default function ContactForm({ variant = "home", compact = false }: Conta
             {loading ? (
               <>
                 <Loader2 size={16} className="mr-2 animate-spin" />
-                Sending Enquiry...
+                Processing Crypto Request...
               </>
             ) : (
               <>
-                Send Enquiry <Send size={16} className="ml-2" />
+                Submit Crypto Investment Request <Send size={16} className="ml-2" />
               </>
             )}
           </Button>

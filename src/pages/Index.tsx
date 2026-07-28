@@ -269,33 +269,108 @@ function FloatingCoins() {
 }
 
 function Ticker() {
-  const items = [
-    { s: "BTC", p: 67234.56, c: 2.43 },
-    { s: "ETH", p: 3456.78, c: 1.87 },
-    { s: "SOL", p: 142.33, c: 5.12 },
-    { s: "AVAX", p: 34.87, c: -1.24 },
-    { s: "MATIC", p: 0.5842, c: 3.06 },
-    { s: "LINK", p: 14.22, c: 0.89 },
-    { s: "ARB", p: 0.92, c: -2.11 },
-    { s: "OP", p: 1.24, c: 4.17 },
-  ];
+  const [prices, setPrices] = useState([
+    { s: "BTC/USD", p: 67840.50, c: 3.42, flash: "" },
+    { s: "ETH/USD", p: 3512.20, c: 2.18, flash: "" },
+    { s: "SOL/USD", p: 148.75, c: 6.84, flash: "" },
+    { s: "BNB/USD", p: 582.40, c: -0.92, flash: "" },
+    { s: "AVAX/USD", p: 36.10, c: -1.45, flash: "" },
+    { s: "LINK/USD", p: 15.60, c: 4.12, flash: "" },
+    { s: "XRP/USD", p: 0.6120, c: 1.85, flash: "" },
+    { s: "ADA/USD", p: 0.4450, c: -2.04, flash: "" },
+  ]);
+
+  const [tradeLog, setTradeLog] = useState({
+    type: "BUY",
+    pair: "BTC/USD",
+    amount: "0.85 BTC",
+    price: "$67,840.50",
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPrices((prev) =>
+        prev.map((item) => {
+          if (Math.random() > 0.4) return item;
+          const delta = (Math.random() - 0.48) * 0.4;
+          const newC = item.c + delta;
+          const newP = item.p * (1 + delta / 100);
+          return {
+            ...item,
+            p: newP,
+            c: newC,
+            flash: delta >= 0 ? "bg-emerald-500/25 text-emerald-300 ring-1 ring-emerald-500/50" : "bg-rose-500/25 text-rose-300 ring-1 ring-rose-500/50",
+          };
+        })
+      );
+
+      const pairs = ["BTC/USD", "ETH/USD", "SOL/USD", "AVAX/USD", "LINK/USD"];
+      const isBuy = Math.random() > 0.35;
+      const pair = pairs[Math.floor(Math.random() * pairs.length)];
+      setTradeLog({
+        type: isBuy ? "BUY" : "SELL",
+        pair,
+        amount: (Math.random() * 2.5 + 0.1).toFixed(2) + " " + pair.split("/")[0],
+        price: "$" + (Math.random() * 1000 + 3000).toLocaleString(undefined, { maximumFractionDigits: 2 }),
+      });
+    }, 1600);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="relative w-full overflow-hidden bg-primary/95 backdrop-blur border-y border-gold/20">
-      <motion.div
-        className="flex gap-10 whitespace-nowrap py-2.5 px-6"
-        animate={{ x: ["0%", "-50%"] }}
-        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-      >
-        {[...items, ...items, ...items].map((t, i) => (
-          <div key={i} className="flex items-center gap-2 shrink-0">
-            <span className="font-heading text-xs font-bold text-gold">{t.s}</span>
-            <span className="font-body text-xs font-medium text-white/90">${t.p.toLocaleString()}</span>
-            <span className={`font-body text-[11px] font-semibold ${t.c >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
-              {t.c >= 0 ? "▲" : "▼"} {Math.abs(t.c).toFixed(2)}%
-            </span>
+    <div className="relative w-full overflow-hidden bg-navy/95 border-y border-gold/30 backdrop-blur-md py-3">
+      <div className="container mx-auto px-4 flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-4 overflow-hidden max-w-full">
+          <div className="flex items-center gap-2 shrink-0 px-2.5 py-1 rounded bg-gold/15 border border-gold/40 text-gold font-mono text-[11px] font-bold tracking-wider shadow-[0_0_10px_rgba(212,175,55,0.2)]">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+            LIVE MARKET FEED
           </div>
-        ))}
-      </motion.div>
+          <motion.div
+            className="flex items-center gap-8 whitespace-nowrap"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+          >
+            {[...prices, ...prices].map((t, i) => {
+              const isUp = t.c >= 0;
+              return (
+                <div
+                  key={i}
+                  className={`flex items-center gap-2.5 px-3 py-1 rounded-lg transition-all duration-300 font-mono text-xs ${t.flash}`}
+                >
+                  <span className="font-bold text-white/95 tracking-wide">{t.s}</span>
+                  <span className="text-white/85">${t.p.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                  <span
+                    className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded font-semibold text-[11px] ${
+                      isUp
+                        ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shadow-[0_0_8px_rgba(16,185,129,0.3)]"
+                        : "bg-rose-500/20 text-rose-400 border border-rose-500/30 shadow-[0_0_8px_rgba(244,63,94,0.3)]"
+                    }`}
+                  >
+                    {isUp ? "▲ +" : "▼ "}
+                    {t.c.toFixed(2)}%
+                  </span>
+                </div>
+              );
+            })}
+          </motion.div>
+        </div>
+
+        <div className="hidden lg:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs backdrop-blur-md">
+          <span className="font-body text-white/60">Execution:</span>
+          <span
+            className={`font-mono font-bold px-2 py-0.5 rounded text-[11px] uppercase tracking-wider ${
+              tradeLog.type === "BUY"
+                ? "bg-emerald-500/90 text-white shadow-[0_0_12px_rgba(16,185,129,0.6)] animate-pulse"
+                : "bg-rose-500/90 text-white shadow-[0_0_12px_rgba(244,63,94,0.6)] animate-pulse"
+            }`}
+          >
+            {tradeLog.type}
+          </span>
+          <span className="font-mono text-white/90 font-semibold">{tradeLog.amount}</span>
+          <span className="font-mono text-gold font-bold">{tradeLog.price}</span>
+        </div>
+      </div>
     </div>
   );
 }
@@ -364,8 +439,13 @@ const Index = () => {
         <meta name="twitter:description" content="Leading cryptocurrency investment firm. Portfolio management, DeFi strategies, staking & secure custody." />
       </Helmet>
 
+      {/* Live Trading Ticker Bar */}
+      <div className="pt-20 lg:pt-24">
+        <Ticker />
+      </div>
+
       {/* Hero — FULL SCREEN */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
+      <section className="relative min-h-[calc(100vh-5rem)] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <div className="w-full h-full bg-gradient-to-br from-navy via-primary to-navy-light" />
           <div className="absolute inset-0 opacity-20" style={{
@@ -373,16 +453,18 @@ const Index = () => {
           }} />
         </div>
 
-        <div className="relative container mx-auto px-4 lg:px-8 py-20 sm:py-24 text-center">
+        <FloatingCoins />
+
+        <div className="relative container mx-auto px-4 lg:px-8 py-16 sm:py-20 text-center z-10">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="max-w-3xl mx-auto"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 mb-8 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 mb-6 backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="font-body text-[11px] tracking-[0.18em] text-gold uppercase">Since 2021 · $2.4B AUM</span>
+              <span className="font-body text-[11px] tracking-[0.18em] text-gold uppercase">Since 2021 · $2.4B Crypto AUM</span>
             </div>
 
             <h1 className="text-h1 sm:text-5xl lg:text-6xl font-heading text-white mb-6 leading-[1.1] drop-shadow-xl">
@@ -391,25 +473,25 @@ const Index = () => {
             </h1>
 
             <p className="font-body text-base sm:text-lg text-white/75 mb-10 max-w-xl mx-auto leading-relaxed">
-              Institutional-grade cryptocurrency strategies, portfolio management, and secure custody for forward-thinking global investors.
+              Institutional-grade cryptocurrency strategies, automated DeFi portfolio management, and bank-grade cold custody for global crypto investors.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
               <button
                 onClick={() => openSignup()}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-3.5 sm:py-4 rounded-md bg-accent text-accent-foreground font-body text-sm font-semibold tracking-wide shadow-xl shadow-accent/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 sm:px-10 py-4 rounded-xl bg-accent text-accent-foreground font-heading text-sm font-bold tracking-wider uppercase shadow-2xl shadow-accent/30 hover:scale-[1.03] active:scale-[0.98] transition-all"
               >
-                Start Investing Today
+                <Coins size={18} />
+                Start Crypto Portfolio
                 <ChevronRight size={16} />
               </button>
-              <a
-                href="#services"
-                onClick={(e) => { e.preventDefault(); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); }}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-3.5 sm:py-4 rounded-md border border-white/20 text-white font-body text-sm font-semibold tracking-wide hover:bg-white/8 hover:border-gold/40 transition-all backdrop-blur-sm"
+              <button
+                onClick={() => openSignup()}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 sm:px-9 py-4 rounded-xl border border-gold/40 bg-gold/10 text-gold font-heading text-sm font-bold tracking-wider uppercase hover:bg-gold/20 hover:border-gold transition-all backdrop-blur-sm shadow-lg shadow-gold/10"
               >
-                Explore Strategies
-                <ArrowUpRight size={16} />
-              </a>
+                <Zap size={16} className="animate-bounce text-emerald-400" />
+                Claim $10,000 Demo Account
+              </button>
             </div>
           </motion.div>
         </div>

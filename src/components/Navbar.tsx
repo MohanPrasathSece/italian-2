@@ -91,7 +91,7 @@ const Navbar = () => {
                 <text x="50%" y="54%" textAnchor="middle" dominantBaseline="middle" fill="white" fontFamily="serif" fontSize="24" fontWeight="700" style={{ letterSpacing: "-0.04em" }}>₿</text>
               </svg>
               <span className={scrolled || !isHome ? "text-foreground" : "text-white"}>
-                Crypto<span className="text-gold">Vest</span>
+                Aethel<span className="text-gold">Capital</span>
               </span>
             </span>
           </Link>

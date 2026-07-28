@@ -249,10 +249,10 @@ export default function SignupModal({ open, onClose, onSwitchToLogin }: SignupMo
               {loading ? (
                 <>
                   <Loader2 size={16} className="mr-2 animate-spin" />
-                  Creating Your Account...
+                  Creating Crypto Account...
                 </>
               ) : (
-                "Create Account"
+                "Create Crypto Account"
               )}
             </Button>
 
