@@ -25,21 +25,21 @@
     --muted: 40 15% 94%;
     --muted-foreground: 215 14% 46%;
 
-    --accent: 38 52% 42%;
-    /* Deeper, richer Gold */
-    --accent-foreground: 40 20% 97%;
+    --accent: 43 85% 58%;
+    /* Bright Metallic Gold */
+    --accent-foreground: 215 35% 15%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 35 20% 88%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 38 52% 42%;
+    --ring: 43 85% 58%;
 
     --radius: 0.5rem;
 
-    --gold: 38 52% 42%;
-    --gold-light: 38 45% 85%;
+    --gold: 43 85% 58%;
+    --gold-light: 43 90% 75%;
     --navy: 215 35% 15%;
     --navy-light: 215 35% 25%;
     --ivory: 40 20% 97%;

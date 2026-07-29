@@ -58,8 +58,10 @@ async function getUser(email) {
     const getOpts = { access: ACCESS_MODE };
     if (token) getOpts.token = token;
     const result = await get(path, getOpts);
-    if (!result?.url) return null;
-    const res = await fetch(result.url, { method: "GET", redirect: "follow" });
+    const url = result?.downloadUrl || result?.url;
+    if (!url) return null;
+    const cacheBustedUrl = url.includes("?") ? `${url}&t=${Date.now()}` : `${url}?t=${Date.now()}`;
+    const res = await fetch(cacheBustedUrl, { method: "GET", redirect: "follow" });
     if (!res.ok) {
       console.warn(`[BlobDB/public] getUser(${email}) HTTP ${res.status}`);
       return null;
@@ -151,8 +153,10 @@ async function getSession(token) {
     const getOpts = { access: ACCESS_MODE };
     if (blobToken) getOpts.token = blobToken;
     const result = await get(path, getOpts);
-    if (!result?.url) return null;
-    const res = await fetch(result.url, { method: "GET", redirect: "follow" });
+    const url = result?.downloadUrl || result?.url;
+    if (!url) return null;
+    const cacheBustedUrl = url.includes("?") ? `${url}&t=${Date.now()}` : `${url}?t=${Date.now()}`;
+    const res = await fetch(cacheBustedUrl, { method: "GET", redirect: "follow" });
     if (!res.ok) return null;
     const json = await res.json();
     return json && typeof json === "object" ? json : null;

@@ -63,7 +63,7 @@ const Navbar = () => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled || !isHome
             ? "bg-card/95 shadow-sm border-b border-border py-3 backdrop-blur-xl"
-            : "bg-transparent py-5"
+            : "bg-primary/90 border-b border-white/10 py-4 backdrop-blur-md shadow-lg"
         }`}
       >
         <nav className="container mx-auto flex items-center justify-between px-4 lg:px-8">
@@ -90,8 +90,8 @@ const Navbar = () => {
                 <circle cx="24" cy="24" r="18" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
                 <text x="50%" y="54%" textAnchor="middle" dominantBaseline="middle" fill="white" fontFamily="serif" fontSize="24" fontWeight="700" style={{ letterSpacing: "-0.04em" }}>₿</text>
               </svg>
-              <span className={scrolled || !isHome ? "text-foreground" : "text-white"}>
-                Aethel<span className="text-gold">Capital</span>
+              <span className={scrolled || !isHome ? "text-foreground" : "text-white font-bold"}>
+                Aethel<span className="text-gold font-extrabold">Capital</span>
               </span>
             </span>
           </Link>
@@ -122,8 +122,8 @@ const Navbar = () => {
                       else scrollToSection(null, offset);
                     }
                   }}
-                  className={`font-body text-xs lg:text-sm font-medium tracking-wide uppercase transition-colors hover:text-gold ${
-                    scrolled || !isHome ? "text-foreground" : "text-white"
+                  className={`font-body text-xs lg:text-sm font-semibold tracking-wider uppercase transition-colors hover:text-gold ${
+                    scrolled || !isHome ? "text-foreground" : "text-white/90 hover:text-white"
                   }`}
                 >
                   {link.label}

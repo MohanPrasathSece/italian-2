@@ -96,7 +96,7 @@ const stats = [
 ];
 
 const faqs = [
-  { q: "What is the minimum investment required?", a: "Our flagship strategies start with a minimum investment of $10,000. For high-net-worth individuals and institutional clients, we offer custom managed accounts with tailored fee structures starting at $100,000." },
+  { q: "What is the minimum investment required?", a: "Our flagship strategies feature flexible entry levels for investors of all scales. For high-net-worth individuals and institutional clients, we offer custom managed accounts with tailored fee structures." },
   { q: "How secure are my digital assets?", a: "We employ institutional-grade security including multi-signature cold storage, hardware security modules (HSMs), 24/7 monitoring, and comprehensive insurance coverage on custodied assets. All protocols undergo rigorous smart contract audits." },
   { q: "What cryptocurrencies do you invest in?", a: "Our core allocation includes established assets like Bitcoin and Ethereum, complemented by curated mid-cap and emerging altcoins selected through our proprietary fundamental and quantitative research framework." },
   { q: "How often will I receive performance reports?", a: "Clients receive weekly performance summaries via email, detailed monthly reports with portfolio breakdowns, and quarterly in-depth reviews including market outlook and strategy adjustments. Our client portal provides real-time access 24/7." },
@@ -463,7 +463,7 @@ const Index = () => {
               of <span className="text-gold">Digital Assets</span>
             </h1>
 
-            <p className="font-body text-base sm:text-lg text-white/75 mb-10 max-w-xl mx-auto leading-relaxed">
+            <p className="font-body text-base sm:text-lg text-white/90 font-medium mb-10 max-w-xl mx-auto leading-relaxed">
               Institutional-grade cryptocurrency strategies, automated DeFi portfolio management, and bank-grade cold custody for global crypto investors.
             </p>
 
@@ -481,7 +481,7 @@ const Index = () => {
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 sm:px-9 py-4 rounded-xl border border-gold/40 bg-gold/10 text-gold font-heading text-sm font-bold tracking-wider uppercase hover:bg-gold/20 hover:border-gold transition-all backdrop-blur-sm shadow-lg shadow-gold/10"
               >
                 <Zap size={16} className="animate-bounce text-emerald-400" />
-                Claim $10,000 Demo Account
+                Claim Demo Account
               </button>
             </div>
           </motion.div>
