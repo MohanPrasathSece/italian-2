@@ -3,9 +3,11 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
-    { "source": "/api/contact", "destination": "/api/contact.js" },
-    { "source": "/robots.txt", "destination": "/api/robots.js" },
-    { "source": "/sitemap.xml", "destination": "/api/sitemap.js" },
+    { "source": "/api/signup", "destination": "/api/signup.cjs" },
+    { "source": "/api/login", "destination": "/api/login.cjs" },
+    { "source": "/api/contact", "destination": "/api/contact.cjs" },
+    { "source": "/robots.txt", "destination": "/server.cjs" },
+    { "source": "/sitemap.xml", "destination": "/server.cjs" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
