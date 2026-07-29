@@ -1,8 +1,14 @@
-const { put, list } = require("@vercel/blob");
+const { put, list, head } = require("@vercel/blob");
 const fs = require("fs");
 const path = require("path");
 
 const LOCAL_DB_PATH = path.resolve(process.cwd(), ".users.json");
+
+const ACCESS_MODE = "public";
+
+function safeEmail(email) {
+  return email.toLowerCase().replace(/@/g, "_at_");
+}
 
 let localUsersCache = [];
 if (fs.existsSync(LOCAL_DB_PATH)) {
@@ -13,76 +19,95 @@ if (fs.existsSync(LOCAL_DB_PATH)) {
   }
 }
 
-async function getBlobUrl() {
+async function getUser(email) {
   const token = process.env.BLOB_READ_WRITE_TOKEN;
   if (!token || token === "undefined" || token === "null" || !token.trim()) {
-    return null;
+    const user = localUsersCache.find(u => u.email.toLowerCase() === email.toLowerCase());
+    return user || null;
   }
   try {
-    const { blobs } = await list({ token });
-    const userBlob = blobs.find((b) => b.pathname === "users.json");
-    return userBlob ? (userBlob.downloadUrl || userBlob.url) : null;
+    const blobPath = `users/${safeEmail(email)}.json`;
+    const { blobs } = await list({ token, prefix: blobPath });
+    const userBlob = blobs.find((b) => b.pathname === blobPath);
+    
+    if (!userBlob) return null;
+
+    const blobUrl = userBlob.downloadUrl || userBlob.url;
+    if (!blobUrl) return null;
+
+    const fetchHeaders = {};
+    const res = await fetch(blobUrl, { method: "GET", headers: fetchHeaders, redirect: "follow" });
+    if (!res.ok) {
+      console.warn(`[BlobDB] getUser(${email}) HTTP ${res.status}`);
+      return null;
+    }
+    const json = await res.json();
+    return json;
   } catch (e) {
-    console.error("Vercel Blob list error:", e);
+    console.error(`[BlobDB] getUser(${email}) failed:`, e.message);
     return null;
   }
 }
 
-async function getUsers() {
-  try {
-    const blobUrl = await getBlobUrl();
-    if (!blobUrl) {
-      return localUsersCache;
-    }
-
-    const cacheBustedUrl = blobUrl.includes("?")
-      ? `${blobUrl}&t=${Date.now()}`
-      : `${blobUrl}?t=${Date.now()}`;
-    const token = process.env.BLOB_READ_WRITE_TOKEN;
-    const response = await fetch(cacheBustedUrl, {
-      headers: token && token !== "undefined" && token !== "null"
-        ? { Authorization: `Bearer ${token}` }
-        : {},
-    });
-    if (!response.ok) {
-      console.warn(`Fetch users from Blob failed with status ${response.status}. Falling back to local cache.`);
-      return localUsersCache;
-    }
-    const json = await response.json();
-    return Array.isArray(json) ? json : localUsersCache;
-  } catch (e) {
-    console.error("Failed to fetch users from Vercel Blob, falling back to local cache:", e);
-    return localUsersCache;
-  }
-}
-
-async function saveUsers(users) {
-  localUsersCache = users;
-  try {
-    fs.writeFileSync(LOCAL_DB_PATH, JSON.stringify(users, null, 2), "utf-8");
-  } catch (e) {
-    console.error("Failed to write users to local file:", e);
-  }
-
+async function saveUser(email, userData) {
   const token = process.env.BLOB_READ_WRITE_TOKEN;
+  
+  // update local cache
+  const idx = localUsersCache.findIndex(u => u.email.toLowerCase() === email.toLowerCase());
+  if (idx >= 0) {
+    localUsersCache[idx] = userData;
+  } else {
+    localUsersCache.push(userData);
+  }
+  try {
+    fs.writeFileSync(LOCAL_DB_PATH, JSON.stringify(localUsersCache, null, 2), "utf-8");
+  } catch(e) {}
+
   if (!token || token === "undefined" || token === "null" || !token.trim()) {
     return;
   }
 
   try {
-    await put("users.json", JSON.stringify(users, null, 2), {
-      access: "public",
+    const blobPath = `users/${safeEmail(email)}.json`;
+    await put(blobPath, JSON.stringify(userData, null, 2), {
+      access: ACCESS_MODE,
       addRandomSuffix: false,
       allowOverwrite: true,
       cacheControl: "no-store, no-cache, must-revalidate, max-age=0",
       token,
     });
+    console.log(`[BlobDB] Saved user to ${blobPath}`);
   } catch (e) {
-    console.error("Failed to put users to Vercel Blob:", e);
+    console.error(`[BlobDB] saveUser failed:`, e);
   }
 }
 
+async function createSession(email) {
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  const sessionToken = "sess_" + Math.random().toString(36).substring(2) + Date.now().toString(36);
+  
+  if (!token || token === "undefined" || token === "null" || !token.trim()) {
+    return sessionToken;
+  }
+
+  try {
+    const blobPath = `sessions/${sessionToken}.json`;
+    await put(blobPath, JSON.stringify({ email, createdAt: new Date().toISOString() }, null, 2), {
+      access: ACCESS_MODE,
+      addRandomSuffix: false,
+      allowOverwrite: true,
+      cacheControl: "no-store, no-cache, must-revalidate, max-age=0",
+      token,
+    });
+    console.log(`[BlobDB] createSession(${email}) -> token:${sessionToken}`);
+  } catch (e) {
+    console.error("[BlobDB] createSession error:", e);
+  }
+  return sessionToken;
+}
+
 module.exports = {
-  getUsers,
-  saveUsers,
+  getUser,
+  saveUser,
+  createSession,
 };

@@ -1,4 +1,4 @@
-const { getUsers } = require("./_lib/blobDb.cjs");
+const { getUser, createSession } = require("./_lib/blobDb.cjs");
 
 async function parseJsonBody(req) {
   try {
@@ -51,8 +51,7 @@ module.exports = async function loginHandler(req, res) {
       return;
     }
 
-    const users = await getUsers();
-    const user = users.find((u) => u.email.toLowerCase() === email.trim().toLowerCase());
+    const user = await getUser(email.trim());
 
     if (!user) {
       console.warn(`[API Login Warning] No account found for: "${email}"`);
@@ -62,7 +61,7 @@ module.exports = async function loginHandler(req, res) {
       return;
     }
 
-    const sessionToken = "sess_" + Math.random().toString(36).substring(2) + Date.now().toString(36);
+    const sessionToken = await createSession(email.trim());
 
     console.log(`[API Login Success] Logged in: "${user.email}"`);
     res.statusCode = 200;

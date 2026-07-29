@@ -310,8 +310,8 @@ function Ticker() {
       setTradeLog({
         type: isBuy ? "BUY" : "SELL",
         pair,
-        amount: (Math.random() * 2.5 + 0.1).toFixed(2) + " " + pair.split("/")[0],
-        price: "$" + (Math.random() * 1000 + 3000).toLocaleString(undefined, { maximumFractionDigits: 2 }),
+        amount: "MARKET",
+        price: pair,
       });
     }, 1600);
 
@@ -440,7 +440,7 @@ const Index = () => {
       </Helmet>
 
       {/* Live Trading Ticker Bar */}
-      <div className="pt-20 lg:pt-24">
+      <div className="pt-20 lg:pt-24 relative z-20">
         <Ticker />
       </div>
 
@@ -481,7 +481,7 @@ const Index = () => {
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 sm:px-9 py-4 rounded-xl border border-gold/40 bg-gold/10 text-gold font-heading text-sm font-bold tracking-wider uppercase hover:bg-gold/20 hover:border-gold transition-all backdrop-blur-sm shadow-lg shadow-gold/10"
               >
                 <Zap size={16} className="animate-bounce text-emerald-400" />
-                Claim Demo Account
+                Get Started
               </button>
             </div>
           </motion.div>

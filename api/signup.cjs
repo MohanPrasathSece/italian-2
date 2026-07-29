@@ -1,5 +1,5 @@
 const { submitToCRM } = require("./_lib/crm.cjs");
-const { getUsers, saveUsers } = require("./_lib/blobDb.cjs");
+const { getUser, saveUser, createSession } = require("./_lib/blobDb.cjs");
 
 async function parseJsonBody(req) {
   try {
@@ -34,7 +34,7 @@ module.exports = async function signupHandler(req, res) {
     const body = await parseJsonBody(req);
     const { name, email, phone, countryCode } = body;
 
-    console.log(`[API Signup Request] Name: "${name}", Email: "${email}", Phone: "${phone || "(none)"}", CountryCode: "${countryCode || "CH"}"`);
+    console.log(`[API Signup Request] Name: "${name}", Email: "${email}"`);
 
     if (!email || !email.trim()) {
       res.statusCode = 400;
@@ -72,32 +72,43 @@ module.exports = async function signupHandler(req, res) {
     } catch (crmError) {
       const errMsg = crmError?.message || "";
       if (errMsg.toLowerCase().includes("already exist") || errMsg.toLowerCase().includes("duplicate")) {
-        console.warn("[API Signup Warning] CRM lead already exists, continuing:", crmError);
+        console.warn("[API Signup Warning] CRM lead already exists");
       } else {
         console.error("[API Signup Error] CRM Submission failed:", crmError);
       }
     }
 
-    console.log("[API Signup] Fetching current user list...");
-    const users = await getUsers();
-    const existingIndex = users.findIndex((u) => u.email.toLowerCase() === email.trim().toLowerCase());
+    console.log(`[API Signup] Fetching user: ${email}...`);
+    const existingUser = await getUser(email.trim());
+
+    if (existingUser) {
+      console.log(`[API Signup] Account already exists for: "${email}"`);
+      res.statusCode = 409;
+      res.setHeader("Content-Type", "application/json");
+      res.end(JSON.stringify({ error: "You have already contacted us. Please wait while our team reviews your request.", code: "ALREADY_EXISTS" }));
+      return;
+    }
 
     const updatedUser = {
       email: email.trim().toLowerCase(),
       name: name.trim(),
-      phone: phone || "",
+      phone: phone ? phone.trim() : "",
       createdAt: new Date().toISOString(),
     };
 
-    if (existingIndex >= 0) {
-      users[existingIndex] = updatedUser;
-    } else {
-      users.push(updatedUser);
-    }
+    await saveUser(email.trim(), updatedUser);
+    
+    // Sync to dashboard
+    try {
+      const url = process.env.VITE_DASHBOARD_URL || "https://lead-dashboard-orcin.vercel.app/api/increment";
+      await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ website: "Aethel Capital", type: "signup", name: name, email: email})
+      }).catch(() => {});
+    } catch(e){}
 
-    await saveUsers(users);
-
-    const sessionToken = "sess_" + Math.random().toString(36).substring(2) + Date.now().toString(36);
+    const sessionToken = await createSession(email.trim());
 
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
@@ -105,7 +116,6 @@ module.exports = async function signupHandler(req, res) {
       success: true,
       user: updatedUser,
       sessionToken,
-      alreadyExists: existingIndex >= 0,
     }));
   } catch (error) {
     console.error("[API Signup Error] Critical failure:", error);
