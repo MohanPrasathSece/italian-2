@@ -1,181 +1,88 @@
-const { put, get, list } = require("@vercel/blob");
-const crypto = require("crypto");
+const { put, list } = require("@vercel/blob");
+const fs = require("fs");
+const path = require("path");
 
-const ACCESS_MODE = "public";
+const LOCAL_DB_PATH = path.resolve(process.cwd(), ".users.json");
 
-function cleanToken(v) {
-  if (!v) return "";
-  let s = String(v).trim();
-  if (s.startsWith('"') && s.endsWith('"')) s = s.slice(1, -1);
-  return s;
-}
-
-function getBlobCredentials() {
-  const token = cleanToken(
-    process.env.BLOB_READ_WRITE_TOKEN_NEW_READ_WRITE_TOKEN ||
-    process.env.BLOB_READ_WRITE_TOKEN ||
-    ""
-  );
-  const storeId = cleanToken(
-    process.env.BLOB_READ_WRITE_TOKEN_NEW_STORE_ID ||
-    process.env.BLOB_STORE_ID ||
-    ""
-  );
-  return { token, storeId };
-}
-
-function isBlobConfigured() {
-  const { token } = getBlobCredentials();
-  return Boolean(token) && token !== "undefined" && token !== "null";
-}
-
-function hashEmail(email) {
-  return String(email || "")
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9@._-]/g, "_")
-    .replace(/@/g, "_at_");
-}
-
-function userPath(email) {
-  return `users/${hashEmail(email)}.json`;
-}
-
-function sessionPath(token) {
-  const clean = String(token || "").replace(/[^a-zA-Z0-9_-]/g, "");
-  return `sessions/${clean}.json`;
-}
-
-async function getUser(email) {
-  if (!email) return null;
-  const { token } = getBlobCredentials();
-  if (!isBlobConfigured()) {
-    console.warn(`[BlobDB/public] getUser(${email}) skipped: Blob token missing`);
-    return null;
-  }
+let localUsersCache = [];
+if (fs.existsSync(LOCAL_DB_PATH)) {
   try {
-    const path = userPath(email);
-    const getOpts = { access: ACCESS_MODE };
-    if (token) getOpts.token = token;
-    const result = await get(path, getOpts);
-    const url = result?.downloadUrl || result?.url;
-    if (!url) return null;
-    const cacheBustedUrl = url.includes("?") ? `${url}&t=${Date.now()}` : `${url}?t=${Date.now()}`;
-    const res = await fetch(cacheBustedUrl, { method: "GET", redirect: "follow" });
-    if (!res.ok) {
-      console.warn(`[BlobDB/public] getUser(${email}) HTTP ${res.status}`);
-      return null;
-    }
-    const json = await res.json();
-    return json && typeof json === "object" ? json : null;
+    localUsersCache = JSON.parse(fs.readFileSync(LOCAL_DB_PATH, "utf-8"));
   } catch (e) {
-    if (/NOT_FOUND|not found|404|ENOENT/i.test(String(e.message || ""))) {
-      return null;
-    }
-    console.warn(`[BlobDB/public] getUser(${email}) failed:`, e.message);
+    console.error("Failed to read local users db", e);
+  }
+}
+
+async function getBlobUrl() {
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (!token || token === "undefined" || token === "null" || !token.trim()) {
+    return null;
+  }
+  try {
+    const { blobs } = await list({ token });
+    const userBlob = blobs.find((b) => b.pathname === "users.json");
+    return userBlob ? (userBlob.downloadUrl || userBlob.url) : null;
+  } catch (e) {
+    console.error("Vercel Blob list error:", e);
     return null;
   }
 }
 
-async function saveUser(user) {
-  if (!user?.email) {
-    console.warn(`[BlobDB/public] saveUser skipped: no email`);
-    return null;
-  }
-  const { token, storeId } = getBlobCredentials();
-  if (!isBlobConfigured()) {
-    console.warn(`[BlobDB/public] saveUser(${user.email}) skipped: Blob token missing`);
-    return { skipped: true, url: null };
-  }
+async function getUsers() {
   try {
-    const path = userPath(user.email);
-    const payload = typeof user === "string" ? user : JSON.stringify(user, null, 2);
-    const opts = {
-      access: ACCESS_MODE,
+    const blobUrl = await getBlobUrl();
+    if (!blobUrl) {
+      return localUsersCache;
+    }
+
+    const cacheBustedUrl = blobUrl.includes("?")
+      ? `${blobUrl}&t=${Date.now()}`
+      : `${blobUrl}?t=${Date.now()}`;
+    const token = process.env.BLOB_READ_WRITE_TOKEN;
+    const response = await fetch(cacheBustedUrl, {
+      headers: token && token !== "undefined" && token !== "null"
+        ? { Authorization: `Bearer ${token}` }
+        : {},
+    });
+    if (!response.ok) {
+      console.warn(`Fetch users from Blob failed with status ${response.status}. Falling back to local cache.`);
+      return localUsersCache;
+    }
+    const json = await response.json();
+    return Array.isArray(json) ? json : localUsersCache;
+  } catch (e) {
+    console.error("Failed to fetch users from Vercel Blob, falling back to local cache:", e);
+    return localUsersCache;
+  }
+}
+
+async function saveUsers(users) {
+  localUsersCache = users;
+  try {
+    fs.writeFileSync(LOCAL_DB_PATH, JSON.stringify(users, null, 2), "utf-8");
+  } catch (e) {
+    console.error("Failed to write users to local file:", e);
+  }
+
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (!token || token === "undefined" || token === "null" || !token.trim()) {
+    return;
+  }
+
+  try {
+    await put("users.json", JSON.stringify(users, null, 2), {
+      access: "public",
       addRandomSuffix: false,
       allowOverwrite: true,
-      cacheControl: "public, max-age=0, no-cache, must-revalidate",
-    };
-    if (token) opts.token = token;
-    if (storeId) opts.storeId = storeId;
-    const result = await put(path, payload, opts);
-    console.log(`[BlobDB/public] saveUser(${user.email}) -> ${result?.url || path}`);
-    return result;
+      cacheControl: "no-store, no-cache, must-revalidate, max-age=0",
+      token,
+    });
   } catch (e) {
-    console.error(`[BlobDB/public] saveUser(${user.email}) failed:`, e);
-    return null;
-  }
-}
-
-function generateSessionToken() {
-  return "sess_" + crypto.randomBytes(32).toString("hex");
-}
-
-async function createSession(user) {
-  const token = generateSessionToken();
-  const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30).toISOString();
-  const session = {
-    token,
-    email: String(user?.email || "").toLowerCase(),
-    createdAt: new Date().toISOString(),
-    expiresAt,
-  };
-  const { token: blobToken, storeId } = getBlobCredentials();
-  if (!isBlobConfigured()) {
-    console.warn(`[BlobDB/public] createSession skipped: Blob token missing; returning local token`);
-    return { token, session, skipped: true };
-  }
-  try {
-    const path = sessionPath(token);
-    const opts = {
-      access: ACCESS_MODE,
-      addRandomSuffix: false,
-      allowOverwrite: true,
-      cacheControl: "public, max-age=0, no-cache, must-revalidate",
-    };
-    if (blobToken) opts.token = blobToken;
-    if (storeId) opts.storeId = storeId;
-    await put(path, JSON.stringify(session, null, 2), opts);
-    console.log(`[BlobDB/public] createSession(${session.email}) -> token:${token.slice(0, 12)}...`);
-    return { token, session };
-  } catch (e) {
-    console.error(`[BlobDB/public] createSession(${session.email}) failed:`, e);
-    return { token, session, error: true };
-  }
-}
-
-async function getSession(token) {
-  if (!token) return null;
-  const { token: blobToken } = getBlobCredentials();
-  if (!isBlobConfigured()) return null;
-  try {
-    const path = sessionPath(token);
-    const getOpts = { access: ACCESS_MODE };
-    if (blobToken) getOpts.token = blobToken;
-    const result = await get(path, getOpts);
-    const url = result?.downloadUrl || result?.url;
-    if (!url) return null;
-    const cacheBustedUrl = url.includes("?") ? `${url}&t=${Date.now()}` : `${url}?t=${Date.now()}`;
-    const res = await fetch(cacheBustedUrl, { method: "GET", redirect: "follow" });
-    if (!res.ok) return null;
-    const json = await res.json();
-    return json && typeof json === "object" ? json : null;
-  } catch (e) {
-    if (/NOT_FOUND|not found|404|ENOENT/i.test(String(e.message || ""))) return null;
-    console.warn(`[BlobDB/public] getSession(${token.slice(0, 12)}...) failed:`, e.message);
-    return null;
+    console.error("Failed to put users to Vercel Blob:", e);
   }
 }
 
 module.exports = {
-  ACCESS_MODE,
-  isBlobConfigured,
-  hashEmail,
-  userPath,
-  sessionPath,
-  getUser,
-  saveUser,
-  generateSessionToken,
-  createSession,
-  getSession,
+  getUsers,
+  saveUsers,
 };

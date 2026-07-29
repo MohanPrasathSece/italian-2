@@ -1,172 +1,116 @@
-const { submitToCRM, incrementLeadDashboard } = require("./_lib/crm.cjs");
-const { getUser, saveUser, createSession } = require("./_lib/blobDb.cjs");
-const {
-  getCountryByISO,
-  formatPhoneForBlob,
-  validatePhone,
-  validateEmail,
-  sanitizeString,
-} = require("./_lib/countries.cjs");
+const { submitToCRM } = require("./_lib/crm.cjs");
+const { getUsers, saveUsers } = require("./_lib/blobDb.cjs");
 
-async function parseJson(req) {
+async function parseJsonBody(req) {
   try {
     if (req.body !== undefined && req.body !== null) {
       return typeof req.body === "string" ? JSON.parse(req.body) : req.body;
     }
-  } catch (e) {}
+  } catch {}
   return new Promise((resolve) => {
     let body = "";
-    req.on("data", (c) => (body += c.toString()));
+    req.on("data", (chunk) => { body += chunk.toString(); });
     req.on("end", () => {
-      try {
-        resolve(body ? JSON.parse(body) : {});
-      } catch {
-        resolve({});
-      }
+      try { resolve(body ? JSON.parse(body) : {}); }
+      catch { resolve({}); }
     });
   });
-}
-
-function setCors(res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-}
-
-function send(res, status, json) {
-  res.statusCode = status;
-  res.setHeader("Content-Type", "application/json");
-  res.end(JSON.stringify(json));
 }
 
 module.exports = async function signupHandler(req, res) {
-  setCors(res);
-  if (req.method === "OPTIONS") {
-    res.statusCode = 200;
-    res.end();
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") { res.statusCode = 200; res.end(); return; }
+  if (req.method !== "POST") {
+    res.statusCode = 405;
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify({ error: "Method not allowed" }));
     return;
   }
-  if (req.method !== "POST") {
-    return send(res, 405, { error: "Method not allowed" });
-  }
 
-  let body;
   try {
-    body = await parseJson(req);
-  } catch (e) {
-    return send(res, 400, { error: "Invalid request body" });
-  }
+    const body = await parseJsonBody(req);
+    const { name, email, phone, countryCode } = body;
 
-  const rawName = sanitizeString(body.name || "");
-  const rawEmail = sanitizeString(body.email || "");
-  const rawPhone = String(body.phone || "");
-  const countryIso = String(body.countryCode || "CH").toUpperCase();
+    console.log(`[API Signup Request] Name: "${name}", Email: "${email}", Phone: "${phone || "(none)"}", CountryCode: "${countryCode || "CH"}"`);
 
-  console.log(`[Signup] Incoming: name="${rawName}" email="${rawEmail}" country="${countryIso}"`);
-
-  if (!rawName) return send(res, 400, { error: "Name is required" });
-  if (!rawEmail || !validateEmail(rawEmail))
-    return send(res, 400, { error: "Please enter a valid email address" });
-
-  const country = getCountryByISO(countryIso);
-  if (!validatePhone(rawPhone, country)) {
-    return send(res, 400, {
-      error: `Invalid phone number. Example: +${country.dialCode} ${country.example}`,
-    });
-  }
-
-  const blobPhone = formatPhoneForBlob(rawPhone, country.dialCode);
-
-  let crmResult = null;
-  let crmAlreadyExists = false;
-  let crmInvalid = false;
-  try {
-    console.log(`[Signup] Step 1/4: Submitting to CRM...`);
-    crmResult = await submitToCRM({
-      name: rawName,
-      email: rawEmail,
-      phone: rawPhone,
-      countryCode: country.iso,
-      message: "CryptoVest Capital — Signup Lead",
-      outlineYourCase: "Signup enquiry via website",
-      description: "CryptoVest Capital — Website Signup",
-    });
-    crmAlreadyExists = crmResult.duplicate || crmResult.alreadyExists;
-    console.log(`[Signup] CRM success. duplicate=${crmAlreadyExists}`);
-  } catch (crmErr) {
-    const code = String(crmErr.code || "").toUpperCase();
-    if (code === "INVALID_LEAD") {
-      crmInvalid = true;
-      console.warn(`[Signup] CRM rejected the lead (INVALID_LEAD). Not continuing.`);
-      return send(res, 422, {
-        error:
-          "We couldn't process your enquiry with the information provided. Please review your details and try again.",
-        code: "INVALID_LEAD",
-      });
+    if (!email || !email.trim()) {
+      res.statusCode = 400;
+      res.setHeader("Content-Type", "application/json");
+      res.end(JSON.stringify({ error: "Email is required" }));
+      return;
     }
-    console.warn(`[Signup] CRM error (non-blocking):`, crmErr.message || crmErr);
-    crmResult = null;
-  }
 
-  let existing = null;
-  try {
-    console.log(`[Signup] Step 2/4: Checking existing Blob user...`);
-    existing = await getUser(rawEmail);
-  } catch (e) {
-    console.warn(`[Signup] Blob getUser warning:`, e.message);
-    existing = null;
-  }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) {
+      res.statusCode = 400;
+      res.setHeader("Content-Type", "application/json");
+      res.end(JSON.stringify({ error: "Please enter a valid email address" }));
+      return;
+    }
 
-  const wasAlreadyExists = crmAlreadyExists || !!existing;
+    if (!name || !name.trim()) {
+      res.statusCode = 400;
+      res.setHeader("Content-Type", "application/json");
+      res.end(JSON.stringify({ error: "Name is required" }));
+      return;
+    }
 
-  let user = existing;
-  if (!user) {
-    user = {
-      email: rawEmail.toLowerCase(),
-      name: rawName,
-      phone: blobPhone,
-      countryCode: country.iso,
+    console.log("[API Signup] Submitting to CRM...");
+    try {
+      await submitToCRM({
+        name: name.trim(),
+        email: email.trim(),
+        phone: phone || "",
+        description: "Aethel Capital",
+        outlineYourCase: "Signup Lead",
+        countryCode: countryCode || "CH",
+      });
+      console.log("[API Signup] CRM submission succeeded.");
+    } catch (crmError) {
+      const errMsg = crmError?.message || "";
+      if (errMsg.toLowerCase().includes("already exist") || errMsg.toLowerCase().includes("duplicate")) {
+        console.warn("[API Signup Warning] CRM lead already exists, continuing:", crmError);
+      } else {
+        console.error("[API Signup Error] CRM Submission failed:", crmError);
+      }
+    }
+
+    console.log("[API Signup] Fetching current user list...");
+    const users = await getUsers();
+    const existingIndex = users.findIndex((u) => u.email.toLowerCase() === email.trim().toLowerCase());
+
+    const updatedUser = {
+      email: email.trim().toLowerCase(),
+      name: name.trim(),
+      phone: phone || "",
       createdAt: new Date().toISOString(),
     };
-    try {
-      console.log(`[Signup] Step 3/4: Creating user in Blob...`);
-      await saveUser(user);
-    } catch (e) {
-      console.warn(`[Signup] Blob saveUser warning:`, e.message);
+
+    if (existingIndex >= 0) {
+      users[existingIndex] = updatedUser;
+    } else {
+      users.push(updatedUser);
     }
-  }
 
-  let sessionToken = null;
-  try {
-    console.log(`[Signup] Step 4/4: Creating session...`);
-    const s = await createSession(user);
-    sessionToken = s.token;
-  } catch (e) {
-    console.warn(`[Signup] createSession warning:`, e.message);
-    sessionToken = require("./_lib/blobDb.cjs").generateSessionToken();
-  }
+    await saveUsers(users);
 
-  if (!crmInvalid) {
-    try {
-      await incrementLeadDashboard("signup", user.name, user.email);
-    } catch (e) {}
-  }
+    const sessionToken = "sess_" + Math.random().toString(36).substring(2) + Date.now().toString(36);
 
-  if (wasAlreadyExists) {
-    return send(res, 200, {
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify({
       success: true,
-      alreadyExists: true,
-      message:
-        "It looks like you've already contacted us. We've recognized your details and will continue with your request.",
-      user,
+      user: updatedUser,
       sessionToken,
-    });
+      alreadyExists: existingIndex >= 0,
+    }));
+  } catch (error) {
+    console.error("[API Signup Error] Critical failure:", error);
+    res.statusCode = 500;
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify({ error: "Internal server error" }));
   }
-
-  return send(res, 200, {
-    success: true,
-    message: "Thank you! Your account has been created successfully.",
-    user,
-    sessionToken,
-  });
 };
