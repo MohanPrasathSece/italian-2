@@ -130,7 +130,7 @@ export default function ContactForm({ variant = "home", compact = false }: Conta
             Ready to Begin Your Crypto Investment Journey?
           </h3>
           <p className="font-body text-base text-muted-foreground leading-relaxed">
-            Join 12,000+ global investors growing their wealth with Summit Ledger. Fill in the form and our
+            Join 12,000+ global investors growing their wealth with theSilverStone Capital. Fill in the form and our
             team of investment advisors will be in touch within 24 hours.
           </p>
         </div>

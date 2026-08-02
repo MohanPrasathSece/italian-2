@@ -1,6 +1,6 @@
-# Summit Ledger
+# theSilverStone Capital
 
-A modern cryptocurrency investment firm website for Summit Ledger. Built with Vite + React + TypeScript, shadcn/ui, Tailwind CSS, and Vercel Blob storage-backed auth with CRM lead capture.
+A modern cryptocurrency investment firm website for theSilverStone Capital. Built with Vite + React + TypeScript, shadcn/ui, Tailwind CSS, and Vercel Blob storage-backed auth with CRM lead capture.
 
 ## Technologies Used
 

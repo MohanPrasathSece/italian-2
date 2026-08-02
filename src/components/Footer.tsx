@@ -51,7 +51,7 @@ const Footer = () => {
                 </span>
               </Link>
               <p className="font-body text-sm leading-relaxed text-white/70">
-                Summit Ledger is a premier digital asset investment firm delivering institutional-grade cryptocurrency strategies, portfolio management, and secure custody for global investors.
+                theSilverStone Capital is a premier digital asset investment firm delivering institutional-grade cryptocurrency strategies, portfolio management, and secure custody for global investors.
               </p>
             </div>
             <div className="flex gap-2">
@@ -172,7 +172,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="text-center md:text-left">
               <p className="font-body text-sm text-white/70">
-                © {new Date().getFullYear()} Summit Ledger. All rights reserved.
+                © {new Date().getFullYear()} theSilverStone Capital. All rights reserved.
               </p>
             </div>
             <div className="text-center md:text-right max-w-3xl">

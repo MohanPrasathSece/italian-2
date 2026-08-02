@@ -81,7 +81,7 @@ const Navbar = () => {
             }`}>
               <TrendingUp size={28} className="text-gold" />
               <span className={scrolled || !isHome ? "text-foreground" : "text-white font-bold"}>
-                Summit Ledger<span className="text-gold font-extrabold">Capital</span>
+                theSilverStone Capital<span className="text-gold font-extrabold">Capital</span>
               </span>
             </span>
           </Link>
