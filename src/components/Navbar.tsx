@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronRight, LogIn, UserPlus, User, LogOut, BookOpen } from "lucide-react";
+import { Menu, X, ChevronRight, LogIn, UserPlus, User, LogOut, BookOpen, TrendingUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/App";
 import { toast } from "sonner";
@@ -79,19 +79,9 @@ const Navbar = () => {
             <span className={`flex items-center gap-2.5 font-heading text-2xl font-bold tracking-tight ${
               !scrolled && isHome ? "text-white" : "text-foreground"
             }`}>
-              <svg width="34" height="34" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                <defs>
-                  <linearGradient id="coinLogoGrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stopColor="#D4AF37" />
-                    <stop offset="1" stopColor="#B7922F" />
-                  </linearGradient>
-                </defs>
-                <circle cx="24" cy="24" r="22" fill="url(#coinLogoGrad)" />
-                <circle cx="24" cy="24" r="18" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-                <text x="50%" y="54%" textAnchor="middle" dominantBaseline="middle" fill="white" fontFamily="serif" fontSize="24" fontWeight="700" style={{ letterSpacing: "-0.04em" }}>₿</text>
-              </svg>
+              <TrendingUp size={28} className="text-gold" />
               <span className={scrolled || !isHome ? "text-foreground" : "text-white font-bold"}>
-                Aethel<span className="text-gold font-extrabold">Capital</span>
+                Summit Ledger<span className="text-gold font-extrabold">Capital</span>
               </span>
             </span>
           </Link>

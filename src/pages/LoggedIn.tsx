@@ -167,7 +167,7 @@ const TOPICS_GRID = [
 ];
 
 const LOGGED_FAQ = [
-  { q: "Is Aethel Capital a registered investment manager?", a: "Aethel Capital operates under applicable regulatory frameworks with registered partners in key jurisdictions. Our structure is designed for international clients with appropriate legal opinions and compliance frameworks." },
+  { q: "Is Summit Ledger a registered investment manager?", a: "Summit Ledger operates under applicable regulatory frameworks with registered partners in key jurisdictions. Our structure is designed for international clients with appropriate legal opinions and compliance frameworks." },
   { q: "How do I fund my account?", a: "Accounts can be funded with major cryptocurrencies (BTC, ETH, USDC, USDT) or fiat via bank wire. Our onboarding team will provide tailored instructions based on your jurisdiction and preferred funding method." },
   { q: "What reporting will I receive?", a: "Clients receive weekly performance digests, detailed monthly portfolio statements with attribution, and quarterly deep dives including macro outlook and strategy repositioning." },
   { q: "Are my digital assets insured?", a: "Custodied assets benefit from comprehensive crime and theft insurance via Lloyd's of London syndicates. Smart-contract risk is further mitigated by audits, bug bounties, and conservative TVL limits." },
@@ -197,8 +197,8 @@ const LoggedIn = () => {
   return (
     <>
       <Helmet>
-        <title>Learn Hub | Aethel Capital</title>
-        <meta name="description" content="Your personal Aethel Capital learning hub. Master crypto, blockchain, and portfolio strategy with our educational resources." />
+        <title>Learn Hub | Summit Ledger</title>
+        <meta name="description" content="Your personal Summit Ledger learning hub. Master crypto, blockchain, and portfolio strategy with our educational resources." />
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 

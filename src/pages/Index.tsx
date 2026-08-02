@@ -10,33 +10,33 @@ import { useAuth } from "@/App";
 const ORGANIZATION_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "@id": "https://aethelcapital.com/#organization",
-  "name": "Aethel Capital",
-  "alternateName": ["Aethel", "CV Capital", "Aethel Capital Partners"],
-  "url": "https://aethelcapital.com/",
+  "@id": "https://summitledger.com/#organization",
+  "name": "Summit Ledger",
+  "alternateName": ["Summit Ledger", "CV Capital", "Summit Ledger Partners"],
+  "url": "https://summitledger.com/",
   "foundingDate": "2021",
-  "description": "Aethel Capital is a leading digital asset investment firm specializing in cryptocurrency portfolio management, DeFi strategies, staking, and blockchain investments.",
+  "description": "Summit Ledger is a leading digital asset investment firm specializing in cryptocurrency portfolio management, DeFi strategies, staking, and blockchain investments.",
   "areaServed": "Worldwide",
   "sameAs": [
-    "https://aethelcapital.com/",
-    "https://twitter.com/aethelcap"
+    "https://summitledger.com/",
+    "https://twitter.com/summitledger"
   ]
 };
 
 const INVESTMENT_FUND_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "InvestmentFund",
-  "name": "Aethel Digital Asset Fund",
+  "name": "Summit Ledger Digital Asset Fund",
   "description": "A diversified cryptocurrency investment fund offering exposure to Bitcoin, Ethereum, and curated altcoin portfolios with risk-managed strategies.",
   "fundType": "Hedge Fund",
-  "url": "https://aethelcapital.com/"
+  "url": "https://summitledger.com/"
 };
 
 const BREADCRUMB_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://aethelcapital.com/" }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://summitledger.com/" }
   ]
 };
 
@@ -102,7 +102,7 @@ const faqs = [
   { q: "How often will I receive performance reports?", a: "Clients receive weekly performance summaries via email, detailed monthly reports with portfolio breakdowns, and quarterly in-depth reviews including market outlook and strategy adjustments. Our client portal provides real-time access 24/7." },
   { q: "Can I withdraw my funds at any time?", a: "Yes, our standard strategies offer weekly liquidity with 7-day notice. We also provide customized lock-up structures for yield-enhanced strategies with correspondingly higher return profiles." },
   { q: "Do you offer tax reporting support?", a: "Absolutely. We provide comprehensive tax documentation including realized gain/loss reports, cost-basis tracking, and jurisdiction-specific guidance through our network of international tax partners." },
-  { q: "What makes Aethel Capital different?", a: "Our edge combines institutional-grade infrastructure, a veteran team with traditional finance and crypto-native expertise, rigorous risk management frameworks, and a transparent, client-first approach." },
+  { q: "What makes Summit Ledger different?", a: "Our edge combines institutional-grade infrastructure, a veteran team with traditional finance and crypto-native expertise, rigorous risk management frameworks, and a transparent, client-first approach." },
 ];
 
 const fadeInUp = {
@@ -414,28 +414,28 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>Home | Aethel Capital — Digital Asset Investment Firm</title>
+        <title>Home | Summit Ledger — Digital Asset Investment Firm</title>
 
-        <meta name="description" content="Aethel Capital is a premier cryptocurrency investment firm offering portfolio management, DeFi strategies, staking, and institutional-grade custody services for global investors." />
+        <meta name="description" content="Summit Ledger is a premier cryptocurrency investment firm offering portfolio management, DeFi strategies, staking, and institutional-grade custody services for global investors." />
 
         <meta name="keywords" content="Crypto investment firm, Bitcoin investment, Ethereum fund, cryptocurrency portfolio management, DeFi investing, crypto staking, digital asset management, blockchain investments, crypto hedge fund, institutional crypto" />
 
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <link rel="canonical" href="https://aethelcapital.com/" />
+        <link rel="canonical" href="https://summitledger.com/" />
 
         <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
         <script type="application/ld+json">{JSON.stringify(INVESTMENT_FUND_SCHEMA)}</script>
         <script type="application/ld+json">{JSON.stringify(BREADCRUMB_SCHEMA)}</script>
 
-        <meta property="og:title" content="Aethel Capital | Premier Digital Asset Investment Firm" />
+        <meta property="og:title" content="Summit Ledger | Premier Digital Asset Investment Firm" />
         <meta property="og:description" content="Institutional-grade cryptocurrency investment strategies. Portfolio management, DeFi yield, staking, and secure custody." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://aethelcapital.com/" />
-        <meta property="og:site_name" content="Aethel Capital" />
+        <meta property="og:url" content="https://summitledger.com/" />
+        <meta property="og:site_name" content="Summit Ledger" />
         <meta property="og:locale" content="en_US" />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Aethel Capital | Digital Asset Investment Firm" />
+        <meta name="twitter:title" content="Summit Ledger | Digital Asset Investment Firm" />
         <meta name="twitter:description" content="Leading cryptocurrency investment firm. Portfolio management, DeFi strategies, staking & secure custody." />
       </Helmet>
 
@@ -501,7 +501,7 @@ const Index = () => {
                 Pioneering Digital Asset Investment Since 2021
               </h2>
               <p className="font-body text-base text-muted-foreground leading-relaxed mb-6">
-                Aethel Capital was founded by veterans from traditional finance and blockchain technology. We bridge the gap between institutional investing and the emerging world of cryptocurrencies, delivering best-in-class strategies with uncompromising security and transparency.
+                Summit Ledger was founded by veterans from traditional finance and blockchain technology. We bridge the gap between institutional investing and the emerging world of cryptocurrencies, delivering best-in-class strategies with uncompromising security and transparency.
               </p>
               <p className="font-body text-base text-muted-foreground leading-relaxed mb-8">
                 Our team manages over $2.4B in digital assets for more than 12,000 clients across 50+ countries, combining deep crypto-native expertise with institutional-grade risk management frameworks.
@@ -607,7 +607,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Why Choose Aethel */}
+      {/* Why Choose Summit Ledger */}
       <section className="py-20 lg:py-28 bg-primary relative overflow-hidden">
         <div className="absolute inset-0 opacity-20 pointer-events-none" style={{
           backgroundImage: `radial-gradient(circle at 30% 20%, hsl(var(--gold)) 0%, transparent 45%), radial-gradient(circle at 70% 80%, hsl(var(--gold)) 0%, transparent 40%)`,
