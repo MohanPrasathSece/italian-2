@@ -40,9 +40,9 @@ app.options('/api/login', (req, res) => { res.setHeader('Access-Control-Allow-Or
 // ── Sitemap & Robots ──
 app.get('/robots.txt', (req, res) => {
   try {
-    const SITE_URL = (getEnv('SITE_URL') || 'https://thesilverstonecapital.com').replace(/\/+$/, '');
+    const SITE_URL = (getEnv('SITE_URL') || 'https://silverstonecapital.com').replace(/\/+$/, '');
     const body = [
-      "# theSilverStone Capital — Crawler Control",
+      "# Silver Stone Capital — Crawler Control",
       "User-agent: *",
       "Allow: /",
       "Disallow: /api/",
@@ -59,7 +59,7 @@ app.get('/robots.txt', (req, res) => {
 
 app.get('/sitemap.xml', (req, res) => {
   try {
-    const SITE_URL = (getEnv('SITE_URL') || 'https://thesilverstonecapital.com').replace(/\/+$/, '');
+    const SITE_URL = (getEnv('SITE_URL') || 'https://silverstonecapital.com').replace(/\/+$/, '');
     const now = new Date().toISOString();
     const esc = (s) => String(s)
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
@@ -109,7 +109,7 @@ app.get('/api/health', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`[server.cjs] theSilverStone Capital backend running on port ${PORT}`);
+  console.log(`[server.cjs] Silver Stone Capital backend running on port ${PORT}`);
   console.log(`[server.cjs] CRM configured: ${!!getEnv('CRM_TOKEN') || !!getEnv('CRM_ENDPOINT')}`);
   console.log(`[server.cjs] Blob configured: ${!!getEnv('BLOB_READ_WRITE_TOKEN')}`);
 });

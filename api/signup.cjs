@@ -64,7 +64,7 @@ module.exports = async function signupHandler(req, res) {
         name: name.trim(),
         email: email.trim(),
         phone: phone || "",
-        description: "theSilverStone Capital",
+        description: "Silver Stone Capital",
         outlineYourCase: "Signup Lead",
         countryCode: countryCode || "CH",
       });
@@ -104,7 +104,7 @@ module.exports = async function signupHandler(req, res) {
       await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ website: "theSilverStone Capital", type: "signup", name: name, email: email})
+        body: JSON.stringify({ website: "Silver Stone Capital", type: "signup", name: name, email: email})
       }).catch(() => {});
     } catch(e){}
 

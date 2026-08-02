@@ -147,10 +147,10 @@ const PrivacyPolicy = () => {
   return (
     <>
       <Helmet>
-        <title>Privacy Policy | theSilverStone Capital</title>
-        <meta name="description" content="theSilverStone Capital privacy policy. How we collect, use, and protect your personal data including CRM processing, cookies, security, and your rights." />
+        <title>Privacy Policy | Silver Stone Capital</title>
+        <meta name="description" content="Silver Stone Capital privacy policy. How we collect, use, and protect your personal data including CRM processing, cookies, security, and your rights." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://thesilverstonecapital.com/privacy" />
+        <link rel="canonical" href="https://silverstonecapital.com/privacy" />
       </Helmet>
 
       <div className="pt-28 sm:pt-32 pb-16 min-h-screen bg-background">
@@ -168,7 +168,7 @@ const PrivacyPolicy = () => {
               </div>
               <h1 className="text-h1 font-heading text-foreground mb-4 leading-tight">Privacy Policy</h1>
               <p className="font-body text-base text-muted-foreground max-w-3xl leading-relaxed">
-                theSilverStone Capital is committed to protecting your privacy. This policy explains what information we collect, how we use it, the basis on which we process it, and the rights and controls you have over your data when using our website and services.
+                Silver Stone Capital is committed to protecting your privacy. This policy explains what information we collect, how we use it, the basis on which we process it, and the rights and controls you have over your data when using our website and services.
               </p>
               <p className="font-body text-xs text-muted-foreground mt-6">
                 <strong className="text-foreground">Last updated:</strong> July 2025 · Effective as of the date posted above.
@@ -214,7 +214,7 @@ const PrivacyPolicy = () => {
           <motion.div {...fadeUp} className="rounded-2xl border border-accent/20 bg-accent/5 p-6 sm:p-8">
             <h3 className="font-heading text-lg font-bold text-foreground mb-2">Acknowledgement</h3>
             <p className="font-body text-sm text-muted-foreground leading-relaxed">
-              By using the theSilverStone Capital website, submitting any form, or creating an account, you acknowledge that you have read, understood, and agreed to the practices described in this Privacy Policy and our accompanying Terms &amp; Conditions. We may update this policy from time to time; material changes will be reflected by updating the "Last updated" date above and, where appropriate, notified via email or prominent website notice.
+              By using the Silver Stone Capital website, submitting any form, or creating an account, you acknowledge that you have read, understood, and agreed to the practices described in this Privacy Policy and our accompanying Terms &amp; Conditions. We may update this policy from time to time; material changes will be reflected by updating the "Last updated" date above and, where appropriate, notified via email or prominent website notice.
             </p>
           </motion.div>
         </div>
