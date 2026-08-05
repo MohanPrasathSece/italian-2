@@ -1,6 +1,6 @@
 const { parseName, getCountryByISO, formatPhoneForCRM, sanitizeString } = require("./countries.cjs");
 
-const WEBSITE_NAME = "CryptoVest Capital";
+const WEBSITE_NAME = "Silver Stone Capital";
 
 async function submitToCRM(leadData) {
   const crmEndpoint =

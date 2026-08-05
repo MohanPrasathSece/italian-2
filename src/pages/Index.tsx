@@ -320,40 +320,42 @@ function Ticker() {
 
   return (
     <div className="relative w-full overflow-hidden bg-navy/95 border-y border-gold/30 backdrop-blur-md py-3">
-      <div className="container mx-auto px-4 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-4 overflow-hidden max-w-full">
-          <div className="flex items-center gap-2 shrink-0 px-2.5 py-1 rounded bg-gold/15 border border-gold/40 text-gold font-mono text-[11px] font-bold tracking-wider shadow-[0_0_10px_rgba(212,175,55,0.2)]">
+      <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-4 flex-1 w-full min-w-0">
+          <div className="flex items-center gap-2 shrink-0 px-2.5 py-1 rounded bg-gold/15 border border-gold/40 text-gold font-mono text-[11px] font-bold tracking-wider shadow-[0_0_10px_rgba(212,175,55,0.2)] relative z-10 bg-navy/95">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
             LIVE MARKET FEED
           </div>
-          <motion.div
-            className="flex items-center gap-8 whitespace-nowrap"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
-          >
-            {[...prices, ...prices].map((t, i) => {
-              const isUp = t.c >= 0;
-              return (
-                <div
-                  key={i}
-                  className={`flex items-center gap-2.5 px-3 py-1 rounded-lg transition-all duration-300 font-mono text-xs ${t.flash}`}
-                >
-                  <span className="font-bold text-white/95 tracking-wide">{t.s}</span>
-                  <span className="text-white/85">${t.p.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
-                  <span
-                    className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded font-semibold text-[11px] ${
-                      isUp
-                        ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shadow-[0_0_8px_rgba(16,185,129,0.3)]"
-                        : "bg-rose-500/20 text-rose-400 border border-rose-500/30 shadow-[0_0_8px_rgba(244,63,94,0.3)]"
-                    }`}
+          <div className="flex-1 overflow-hidden relative">
+            <motion.div
+              className="flex items-center gap-8 whitespace-nowrap w-max"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+            >
+              {[...prices, ...prices].map((t, i) => {
+                const isUp = t.c >= 0;
+                return (
+                  <div
+                    key={i}
+                    className={`flex items-center gap-2.5 px-3 py-1 rounded-lg transition-all duration-300 font-mono text-xs ${t.flash}`}
                   >
-                    {isUp ? "▲ +" : "▼ "}
-                    {t.c.toFixed(2)}%
-                  </span>
-                </div>
-              );
-            })}
-          </motion.div>
+                    <span className="font-bold text-white/95 tracking-wide">{t.s}</span>
+                    <span className="text-white/85">${t.p.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                    <span
+                      className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded font-semibold text-[11px] ${
+                        isUp
+                          ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shadow-[0_0_8px_rgba(16,185,129,0.3)]"
+                          : "bg-rose-500/20 text-rose-400 border border-rose-500/30 shadow-[0_0_8px_rgba(244,63,94,0.3)]"
+                      }`}
+                    >
+                      {isUp ? "▲ +" : "▼ "}
+                      {t.c.toFixed(2)}%
+                    </span>
+                  </div>
+                );
+              })}
+            </motion.div>
+          </div>
         </div>
 
         <div className="hidden lg:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs backdrop-blur-md">
@@ -459,8 +461,8 @@ const Index = () => {
             </div>
 
             <h1 className="text-h1 sm:text-5xl lg:text-6xl font-heading text-white mb-6 leading-[1.1] drop-shadow-xl">
-              Invest in the <span className="text-gold">Future</span><br className="sm:block hidden" />
-              of <span className="text-gold">Digital Assets</span>
+              INVEST IN THE <span className="text-gold">FUTURE</span><br className="sm:block hidden" />
+              OF <span className="text-gold">DIGITAL ASSETS</span>
             </h1>
 
             <p className="font-body text-base sm:text-lg text-white/90 font-medium mb-10 max-w-xl mx-auto leading-relaxed">
